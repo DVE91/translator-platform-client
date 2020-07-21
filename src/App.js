@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
-import NewOrderPage from "./pages/Order/NewOrderPage";
+import Steps from "./pages/Order/Steps";
 import "./App.css";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Navigation />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/order/step1" component={NewOrderPage} />
+        <Route exact path="/order" component={Steps} />
       </Switch>
     </div>
   );

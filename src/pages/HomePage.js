@@ -17,7 +17,7 @@ export default function HomePage() {
           I want a fast, high quality translation that is perfectly tailored to
           my brand.
         </h3>
-        <Link to={"/order/step1"}>
+        <Link to={"/order"}>
           <MyButton text="Let's go!" />
         </Link>
         <MyButton text="Login / signup" />

@@ -1,12 +1,13 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import Stepper from "../../components/Order/Stepper";
 
-export default function HomePage() {
+export default function Steps() {
   return (
     <Container>
       <Box my={4}>
-        <h1>This is the order page step 1!</h1>
+        <Stepper />
       </Box>
     </Container>
   );
