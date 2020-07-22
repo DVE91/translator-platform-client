@@ -1,10 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import FileUpload from "./FileUpload";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +32,7 @@ function getSteps() {
 
 export default function MyStepper() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -65,7 +67,8 @@ export default function MyStepper() {
         ) : (
           <div>
             <div>
-              <h3>Upload your file here</h3>
+              <FileUpload />
+              <br />
             </div>
             <div>
               <Button
