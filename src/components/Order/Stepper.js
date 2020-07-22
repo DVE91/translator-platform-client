@@ -6,7 +6,10 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import FileUpload from "./FileUpload";
+import FileUpload from "./StepOne/FileUpload";
+import StepTwo from "./StepTwo/StepTwo";
+import StepThree from "./StepThree/StepThree";
+import StepFour from "./StepFour/StepFour";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,8 +50,6 @@ export default function MyStepper() {
     setActiveStep(0);
   };
 
-  console.log("What's active step?", activeStep);
-
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
@@ -70,15 +71,17 @@ export default function MyStepper() {
           <div>
             <div>
               {activeStep === 0 ? (
-                <div>
-                  <FileUpload />
-                  <br />
-                </div>
+                <FileUpload />
+              ) : activeStep === 1 ? (
+                <StepTwo />
+              ) : activeStep === 2 ? (
+                <StepThree />
               ) : (
-                <div></div>
+                <StepFour />
               )}
             </div>
             <div>
+              <br />
               <Button
                 disabled={activeStep === 0}
                 onClick={handleBack}
@@ -87,7 +90,7 @@ export default function MyStepper() {
                 Back
               </Button>
               <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                {activeStep === steps.length - 1 ? "Confirm order" : "Next"}
               </Button>
             </div>
           </div>
