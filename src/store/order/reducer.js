@@ -13,6 +13,8 @@ export default function OrderSliceReducer(state = initialState, action) {
       return { ...state, originalDocument: action.payload };
     case "TITLE_ADDED":
       return { ...state, title: action.payload };
+    case "TYPE_ADDED":
+      return { ...state, type: action.payload };
     default:
       return state;
   }

@@ -11,3 +11,10 @@ export function titleAdded(title) {
     payload: title,
   };
 }
+
+export function typeAdded(type) {
+  return {
+    type: "TYPE_ADDED",
+    payload: type,
+  };
+}

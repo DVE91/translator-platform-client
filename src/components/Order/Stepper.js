@@ -47,6 +47,8 @@ export default function MyStepper() {
     setActiveStep(0);
   };
 
+  console.log("What's active step?", activeStep);
+
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
@@ -67,8 +69,14 @@ export default function MyStepper() {
         ) : (
           <div>
             <div>
-              <FileUpload />
-              <br />
+              {activeStep === 0 ? (
+                <div>
+                  <FileUpload />
+                  <br />
+                </div>
+              ) : (
+                <div></div>
+              )}
             </div>
             <div>
               <Button

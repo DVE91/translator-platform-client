@@ -8,7 +8,11 @@ export default function About() {
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus,
         nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem
-        felis nec erat
+        felis nec erat ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+        maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar
+        lorem felis nec erat ipsum dolor sit amet, consectetur adipiscing elit.
+        Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non
+        pulvinar lorem felis nec erat
       </p>
     </Box>
   );
