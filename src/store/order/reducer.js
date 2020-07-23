@@ -3,7 +3,7 @@ const initialState = {
   title: null,
   type: null,
   wordCount: null,
-  orginalLanguage: null,
+  originalLanguage: null,
   nativeLanguage: null,
   originalDocument: null,
   startingDate: null,
@@ -32,6 +32,8 @@ export default function OrderSliceReducer(state = initialState, action) {
       return { ...state, originalLanguage: action.payload };
     case "NATIVE_LANGUAGE_ADDED":
       return { ...state, nativeLanguage: action.payload };
+    case "PROFILE_ADDED":
+      return { ...state, profileId: action.payload };
     default:
       return state;
   }

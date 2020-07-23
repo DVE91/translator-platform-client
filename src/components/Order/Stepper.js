@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createOrder } from "../../store/order/actions";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -34,6 +36,7 @@ function getSteps() {
 }
 
 export default function MyStepper() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
@@ -48,6 +51,10 @@ export default function MyStepper() {
 
   const handleReset = () => {
     setActiveStep(0);
+  };
+
+  const handleOrderConfirm = () => {
+    dispatch(createOrder());
   };
 
   return (
@@ -89,7 +96,15 @@ export default function MyStepper() {
               >
                 Back
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={
+                  activeStep === steps.length - 1
+                    ? handleOrderConfirm
+                    : handleNext
+                }
+              >
                 {activeStep === steps.length - 1 ? "Confirm order" : "Next"}
               </Button>
             </div>

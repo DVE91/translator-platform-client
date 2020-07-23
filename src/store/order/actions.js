@@ -1,3 +1,6 @@
+import { apiUrl } from "../../config/constants";
+import axios from "axios";
+
 export function documentUploaded(file) {
   console.log("WHATS PAYLOAD DOC?", file);
   return {
@@ -40,3 +43,21 @@ export function nativeLanguageAdded(newLanguage) {
     payload: newLanguage,
   };
 }
+
+export function profileAdded(id) {
+  console.log("WHATS PROFILE PAYLOAD?", id);
+  return {
+    type: "PROFILE_ADDED",
+    payload: id,
+  };
+}
+
+export const createOrder = () => {
+  return async (dispatch, getState) => {
+    const newJob = getState().order;
+
+    const response = await axios.post(`${apiUrl}/user/order`, {});
+
+    console.log("WHATS RESPONSE?", response.data);
+  };
+};
