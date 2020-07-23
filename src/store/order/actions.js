@@ -56,7 +56,7 @@ export const createOrder = () => {
   return async (dispatch, getState) => {
     const newJob = getState().order;
 
-    const response = await axios.post(`${apiUrl}/user/order`, {});
+    const response = await axios.post(`${apiUrl}/user/order`, newJob);
 
     console.log("WHATS RESPONSE?", response.data);
   };

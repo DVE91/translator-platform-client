@@ -15,15 +15,18 @@ export default function TranslatorCard(props) {
     dispatch(profileAdded(profileId));
   };
 
+  const imgStyle = {
+    float: "left",
+    borderRadius: "50%",
+    width: "100px",
+    margin: "5px 0px 20px 5px",
+  };
+
   return (
     <Paper>
       <h4>
         {props.profile.user.imageUrl ? (
-          <img
-            alt=""
-            style={"float:left;border-radius:50%;width:30px"}
-            src={props.profile.user.imageUrl}
-          />
+          <img alt="" style={imgStyle} src={props.profile.user.imageUrl} />
         ) : null}
         {props.profile.user.fullName}
       </h4>
