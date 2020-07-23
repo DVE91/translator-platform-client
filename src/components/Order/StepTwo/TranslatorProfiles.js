@@ -1,19 +1,6 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Paper } from "@material-ui/core";
-import MyButton from "../../Button";
-import { useState } from "react";
-
-function Item(props) {
-  return (
-    <Paper>
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
-
-      <MyButton text="Select" variant="contained" />
-    </Paper>
-  );
-}
+import Item from "./TranslatorCard";
 
 export default function TranslatorProfiles() {
   var items = [

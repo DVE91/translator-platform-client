@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { documentUploaded, titleAdded } from "../../../store/order/actions";
 import { DropzoneArea } from "material-ui-dropzone";
 import Container from "@material-ui/core/Container";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import { TextField } from "@material-ui/core";
 import TranslationOptions from "./TranslationOptions";
 
@@ -34,16 +36,20 @@ export default function FileUpload() {
     <div className="step">
       <div>
         <h5> Upload your file here (.xml, .txt or .docx)</h5>
-        <Container maxWidth="sm">
-          <TextField
-            className=".MuiInput-formControl"
-            color="primary"
-            type="text"
-            required={true}
-            value={title}
-            onChange={(e) => titleChangeHandler(e.target.value)}
-            placeholder="file title (required)"
-          />
+        <Container maxWidth="md">
+          <FormControl variant="outlined" className="formControl">
+            <TextField
+              className=".MuiInput-formControl"
+              color="primary"
+              type="text"
+              variant="outlined"
+              required={true}
+              value={title}
+              onChange={(e) => titleChangeHandler(e.target.value)}
+              placeholder="file title (required)"
+            />
+            <FormHelperText>Required</FormHelperText>
+          </FormControl>
 
           <DropzoneArea
             filesLimit={1}

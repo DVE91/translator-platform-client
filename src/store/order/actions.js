@@ -26,3 +26,17 @@ export function datesAdded(date) {
     payload: date,
   };
 }
+
+export function originalLanguageAdded(oldLanguage) {
+  return {
+    type: "ORIGINAL_LANGUAGE_ADDED",
+    payload: oldLanguage,
+  };
+}
+
+export function nativeLanguageAdded(newLanguage) {
+  return {
+    type: "NATIVE_LANGUAGE_ADDED",
+    payload: newLanguage,
+  };
+}

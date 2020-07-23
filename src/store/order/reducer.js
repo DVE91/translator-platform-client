@@ -28,6 +28,10 @@ export default function OrderSliceReducer(state = initialState, action) {
         startingDate: action.payload.start,
         endDate: action.payload.end,
       };
+    case "ORIGINAL_LANGUAGE_ADDED":
+      return { ...state, originalLanguage: action.payload };
+    case "NATIVE_LANGUAGE_ADDED":
+      return { ...state, nativeLanguage: action.payload };
     default:
       return state;
   }
