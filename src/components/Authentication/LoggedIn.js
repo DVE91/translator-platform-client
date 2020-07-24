@@ -13,7 +13,7 @@ export default function LoggedIn() {
     <div>
       <Tab component="a" label={`Welcome, ${user.fullName}!`} />{" "}
       {user.isTranslator === true ? (
-        <Tab component="button" label="Visit dashboard" href="/dashboard" />
+        <Tab component="a" label="Visit dashboard" to="/dashboard" />
       ) : null}
       <Button
         size="small"

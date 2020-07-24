@@ -23,7 +23,7 @@ export default function Navigation() {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs value={0} variant="fullWidth" aria-label="nav tabs">
-          <Tab component="button" label="Tone of Choice" href="/" />
+          <Tab component="a" label="Tone of Choice" href="/" />
           {user.fullName !== undefined ? <LoggedIn /> : null}
         </Tabs>
       </AppBar>
