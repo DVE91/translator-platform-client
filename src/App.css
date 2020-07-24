@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.step {
+  background-color: rgb(242, 247, 255);
+}
+
+.form-control {
+  height: 100px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
