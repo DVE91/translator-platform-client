@@ -55,6 +55,7 @@ export default function MyStepper() {
 
   const handleOrderConfirm = () => {
     dispatch(createOrder());
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   return (
