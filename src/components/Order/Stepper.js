@@ -99,7 +99,7 @@ export default function MyStepper() {
               </Button>
               <Button
                 variant="contained"
-                color="primary"
+                color="secondary"
                 onClick={
                   activeStep === steps.length - 1
                     ? handleOrderConfirm
