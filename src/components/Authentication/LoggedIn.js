@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { logOut } from "../../store/user/actions";
@@ -11,11 +12,17 @@ export default function LoggedIn() {
 
   return (
     <div>
-      <Tab component="a" label={`Welcome, ${user.fullName}!`} />{" "}
+      <Tab component="a" label={`Welcome, ${user.fullName}!`} disabled />{" "}
       {user.isTranslator === true ? (
-        <Tab component="a" label="Visit dashboard" to="/dashboard" />
+        <Tab
+          component="a"
+          href="/dashboard"
+          onClick={(event) => event.preventDefault}
+          label="my dashboard"
+        />
       ) : null}
       <Button
+        style={{ margin: "0px 10px 0px 0px" }}
         size="small"
         variant="contained"
         color="secondary"

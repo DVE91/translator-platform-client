@@ -14,7 +14,7 @@ export default function TranslatorLoginPage() {
     if (token !== null && user.isTranslator === true) {
       history.push("/dashboard");
     }
-  }, [token, history]);
+  }, [token, history, user.isTranslator]);
 
   return (
     <div>

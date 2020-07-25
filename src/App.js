@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
