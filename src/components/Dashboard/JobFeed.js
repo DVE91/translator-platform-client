@@ -17,19 +17,20 @@ const useStyles = makeStyles({
 export default function JobFeed(props) {
   const classes = useStyles();
 
-  let activeStep = 60;
+  let activeStep = 0;
   const handleProgress = () => {
     const translatedCount =
-      props.translatedDocument === null
+      props.translatedDocument === null || ""
         ? 0
-        : props.translatedDocument.slice(" ").length;
-    const progress = (translatedCount / 100) * props.wordCount;
-    activeStep = progress;
+        : props.translatedDocument.split(" ").length;
+
+    const progress = (translatedCount / props.wordCount) * 100;
+    activeStep = parseInt(progress);
     if (translatedCount > props.wordCount || props.submitted === true) {
       activeStep = 100;
     }
   };
-  //handleProgress();
+  handleProgress();
 
   return (
     <div>

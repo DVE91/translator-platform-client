@@ -21,6 +21,8 @@ const useStyles = makeStyles(() => ({
   chartContainer: {
     height: 600,
     position: "relative",
+    display: "flex-inline",
+    flexDirection: "column",
   },
   actions: {
     justifyContent: "flex-end",
@@ -43,7 +45,7 @@ export default function MyProfile() {
       />
       <Divider />
       <CardContent>
-        <div className={classes.chartContainer}>*TO DO</div>
+        <div className={classes.chartContainer}></div>
       </CardContent>
     </Card>
   );

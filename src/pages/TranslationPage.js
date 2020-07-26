@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import OriginalDocument from "../components/Dashboard/Translation/OriginalDocument";
+import TranslatedDocument from "../components/Dashboard/Translation/TranslatedDocument";
 import { Card, Button } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
@@ -53,8 +54,6 @@ export default function TranslationPage() {
     return parseInt(id) === job.id;
   });
 
-  console.log("HERES SINGLEJOB", singleJob);
-
   return (
     <div>
       {" "}
@@ -92,7 +91,7 @@ export default function TranslationPage() {
             </Grid>
             <Grid item xs={6}>
               <Card className={classes.card} elevation={3}>
-                translated doc
+                <TranslatedDocument />
               </Card>
             </Grid>
           </Grid>
