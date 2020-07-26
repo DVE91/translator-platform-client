@@ -34,7 +34,7 @@ export default function MyAvailability() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} raised={true}>
       <CardHeader
         title={
           <Typography gutterBottom component="h2" variant="button">

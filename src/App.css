@@ -44,3 +44,13 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.display-linebreak {
+  white-space: pre-line;
+}

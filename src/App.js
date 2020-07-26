@@ -11,6 +11,7 @@ import TranslatorLoginPage from "./pages/Authentication/TranslatorLoginPage";
 import LoginPage from "./pages/Authentication/LoginPage";
 import SignUpPage from "./pages/Authentication/SignUpPage";
 import DashboardPage from "./pages/DashboardPage";
+import TranslationPage from "./pages/TranslationPage";
 import TranslatorSignUpPage from "./pages/Authentication/TranslatorSignUpPage";
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
           path="/signup/translator"
           component={TranslatorSignUpPage}
         />
-        <Route path="/dashboard" component={DashboardPage} />
+        <Route exact path="/dashboard" component={DashboardPage} />
+        <Route path="/dashboard/jobs/:id" component={TranslationPage} />
       </Switch>
     </div>
   );

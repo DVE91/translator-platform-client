@@ -1,5 +1,7 @@
 const initialState = {
   token: localStorage.getItem("token"),
+  fullName: null,
+  emailAddress: null,
 };
 
 export default function UserSliceReducer(state = initialState, action) {

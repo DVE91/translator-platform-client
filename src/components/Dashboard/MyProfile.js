@@ -32,7 +32,7 @@ export default function MyProfile() {
   const user = useSelector(selectUser);
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} raised={true}>
       <CardHeader
         title={
           <Typography gutterBottom component="h2" variant="button">

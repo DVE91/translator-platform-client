@@ -1,6 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectToken, selectUser } from "../store/user/selectors";
+import { useHistory } from "react-router-dom";
 import MyJobs from "../components/Dashboard/MyJobs";
 import MyFinances from "../components/Dashboard/MyFinances";
 import MyAvailability from "../components/Dashboard/MyAvailability";
@@ -17,6 +21,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DashboardPage() {
   const classes = useStyles();
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (token === null || user.isTranslator === false) {
+      history.push("/");
+    }
+  }, [token, history, user.isTranslator]);
 
   return (
     <div className={classes.root}>

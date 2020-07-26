@@ -46,7 +46,7 @@ export default function Navigation() {
             style={{ color: "white" }}
           />
 
-          {user.fullName !== undefined ? <LoggedIn /> : null}
+          {user.token ? <LoggedIn /> : null}
         </Tabs>
       </AppBar>
     </div>
