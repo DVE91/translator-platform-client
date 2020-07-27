@@ -22,6 +22,12 @@ export default function FileUpload() {
       reader.addEventListener("loadend", function () {
         const content = reader.result;
         wordCount = content.split(" ").length;
+        content.split(" ").map((word) => {
+          if (word.indexOf("\n") !== -1) {
+            wordCount++;
+          }
+          return word;
+        });
         dispatch(documentUploaded({ file: content, wordCount }));
       });
     }
@@ -35,7 +41,7 @@ export default function FileUpload() {
   return (
     <div className="step">
       <div>
-        <h5> Upload your file here (.xml, .txt or .docx)</h5>
+        <h5> Upload your file here (.xml or .txt) </h5>
         <Container maxWidth="md">
           <FormControl variant="outlined" className="formControl">
             <TextField
@@ -54,12 +60,7 @@ export default function FileUpload() {
           <DropzoneArea
             filesLimit={1}
             showFileNames={true}
-            acceptedFiles={[
-              "text/plain",
-              "text/xml",
-              "application/xml",
-              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            ]}
+            acceptedFiles={["text/plain", "text/xml", "application/xml"]}
             onChange={(file) => fileChangeHandler(file[0])}
           />
         </Container>

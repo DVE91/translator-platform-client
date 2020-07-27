@@ -44,3 +44,24 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.profileItem {
+  height: 100%;
+}
+
+.display-linebreak {
+  white-space: pre-line;
+}
