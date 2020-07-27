@@ -29,7 +29,9 @@ export default function DashboardPage() {
     if (token === null || user.isTranslator === false) {
       history.push("/");
     }
-  }, [token, history, user.isTranslator]);
+  }, [token, history]);
+
+  console.log("Or is it this one? (DASHBOARDPAGE)");
 
   return (
     <div className={classes.root}>

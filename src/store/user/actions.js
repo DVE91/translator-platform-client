@@ -1,6 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { selectToken } from "./selectors";
+import { showError, showMessage } from "../appState/actions";
 
 export const loginSuccess = (userWithToken) => {
   return {
@@ -25,15 +26,13 @@ export const login = (emailAddress, password) => {
       });
 
       dispatch(loginSuccess(response.data));
-      //dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
-      //dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        //dispatch(setMessage("danger", true, error.response.data.message));
+        dispatch(showError());
       } else {
         console.log(error.message);
-        //dispatch(setMessage("danger", true, error.message));
+        dispatch(showError());
       }
     }
   };
@@ -49,7 +48,6 @@ export const signUpTranslator = (
   writingStyle
 ) => {
   return async (dispatch, getState) => {
-    //dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/signup/translator`, {
         fullName,
@@ -59,19 +57,15 @@ export const signUpTranslator = (
         experience,
         writingStyle,
       });
-
       dispatch(loginSuccess(response.data));
-      //dispatch(showMessageWithTimeout("success", true, "account created"));
-      //dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        //dispatch(setMessage("danger", true, error.response.data.message));
+        dispatch(showError());
       } else {
         console.log(error.message);
-        //dispatch(setMessage("danger", true, error.message));
+        dispatch(showError());
       }
-      //dispatch(appDoneLoading());
     }
   };
 };
@@ -83,8 +77,6 @@ export const getUserWithStoredToken = () => {
 
     // if we have no token, stop
     if (token === null) return;
-
-    //dispatch(appLoading());
     try {
       // if we do have a token,
       // check wether it is still valid or if it is expired
@@ -94,14 +86,12 @@ export const getUserWithStoredToken = () => {
 
       // token is still valid
       dispatch(tokenStillValid(response.data));
-      //dispatch(appDoneLoading());
     } catch (error) {
       console.log(error.response.message);
 
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
       dispatch(logOut());
-      // dispatch(appDoneLoading());
     }
   };
 };

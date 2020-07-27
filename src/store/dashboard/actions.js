@@ -1,20 +1,19 @@
-import { apiUrl, defaultPaginationLimit } from "../../config/constants";
+import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectUser } from "../user/selectors";
 
-export function jobsFetched(jobs) {
+export const jobsFetched = (jobs) => {
   return {
     type: "JOBS_FETCHED",
     payload: jobs,
   };
-}
+};
 
-export function profileFetched(profile) {
+export const profileFetched = (profile) => {
   return {
     type: "PROFILE_FETCHED",
     payload: profile,
   };
-}
+};
 
 export const fetchProfile = (userId) => {
   return async function (dispatch, getState) {
@@ -32,10 +31,8 @@ export const fetchProfile = (userId) => {
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        //dispatch(setMessage("danger", true, error.response.data.message));
       } else {
         console.log(error.message);
-        //dispatch(setMessage("danger", true, error.message));
       }
     }
   };
@@ -57,28 +54,22 @@ export const fetchJobs = (userId) => {
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        //dispatch(setMessage("danger", true, error.response.data.message));
       } else {
         console.log(error.message);
-        //dispatch(setMessage("danger", true, error.message));
       }
     }
   };
 };
 
-export const updateJobTranslation = (translatedDocument) => {
+export const updateJob = (translatedDocument, submitted, userId, jobId) => {
   return async (dispatch, getState) => {
     const token = getState().user.token;
-    const id = getState().user.id;
-    //dispatch(appLoading());
-
-    console.log("Whats token", token);
-
     try {
       const response = await axios.patch(
-        `${apiUrl}/user/3/jobs/5`,
+        `${apiUrl}/user/${userId}/jobs/${jobId}`,
         {
           translatedDocument,
+          submitted,
         },
         {
           headers: {
@@ -86,22 +77,14 @@ export const updateJobTranslation = (translatedDocument) => {
           },
         }
       );
-      //dispatch(
-      //   showMessageWithTimeout("success", false, response.data.message, 3000)
-      // );
-
       const jobs = response.data.jobs;
       dispatch(jobsFetched(jobs));
-      //dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log("error", error.response.data.message);
-        //dispatch(setMessage("danger", true, error.response.data.message));
       } else {
         console.log(error.message);
-        //dispatch(setMessage("danger", true, error.message));
       }
-      //dispatch(appDoneLoading());
     }
   };
 };

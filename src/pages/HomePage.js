@@ -11,6 +11,8 @@ import { useStylesHome } from "../style/Homepage";
 export default function HomePage() {
   const classes = useStylesHome();
 
+  console.log("HOMEPAGE RENDER");
+
   return (
     <div>
       <CssBaseline />
