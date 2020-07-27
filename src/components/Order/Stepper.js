@@ -7,11 +7,11 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import FileUpload from "./StepOne/FileUpload";
 import StepTwo from "./StepTwo/StepTwo";
 import StepThree from "./StepThree/StepThree";
 import StepFour from "./StepFour/StepFour";
+import MySnackbar from "../MySnackbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,13 +67,18 @@ export default function MyStepper() {
           </Step>
         ))}
       </Stepper>
+      <MySnackbar />
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>
-              Thank you for your translation order!
-            </Typography>
-            <Button onClick={handleReset}>Reset</Button>
+            <Button
+              onClick={handleReset}
+              variant="outlined"
+              color="primary"
+              size="small"
+            >
+              Repeat order process.
+            </Button>
           </div>
         ) : (
           <div>
@@ -108,6 +113,7 @@ export default function MyStepper() {
               >
                 {activeStep === steps.length - 1 ? "Confirm order" : "Next"}
               </Button>
+              <MySnackbar />
             </div>
           </div>
         )}

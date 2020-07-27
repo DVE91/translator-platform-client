@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useStyles } from "../../style/authentication/Login";
+import MySnackbar from "../MySnackbar";
 
 export default function Login(props) {
   const classes = useStyles();
@@ -95,6 +96,7 @@ export default function Login(props) {
           </Grid>
         </form>
       </div>
+      <MySnackbar />
       <Box mt={8}></Box>
     </Container>
   );

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectJobs } from "../store/dashboard/selectors";
 import { fetchJobs } from "../store/dashboard/actions";
 import { selectUser, selectToken } from "../store/user/selectors";
+import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -52,13 +53,15 @@ export default function TranslationPage() {
     } else {
       dispatch(fetchJobs(user.id));
     }
-  }, [token, history, dispatch, user.isTranslator, allJobs]);
+  }, [token, history, dispatch, user.isTranslator, allJobs[id]]);
+
+  console.log("RENDER TEST TRANSLATIONPAGE");
 
   return (
     <div>
       {" "}
       {!singleJob ? (
-        <p>Loading...</p>
+        <Loading />
       ) : (
         <div className={classes.root}>
           <Grid container spacing={3}>
@@ -91,7 +94,12 @@ export default function TranslationPage() {
             </Grid>
             <Grid item xs={6}>
               <Card className={classes.card} elevation={3}>
-                <TranslatedDocument savedText={singleJob.translatedDocument} />
+                <TranslatedDocument
+                  userId={user.id}
+                  jobId={singleJob.id}
+                  submitted={singleJob.submitted}
+                  savedText={singleJob.translatedDocument}
+                />
               </Card>
             </Grid>
           </Grid>

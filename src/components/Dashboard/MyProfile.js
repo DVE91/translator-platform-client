@@ -9,18 +9,19 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Divider,
   Button,
   Typography,
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
+import Loading from "../Loading";
 
 const useStyles = makeStyles(() => ({
   root: {},
   chartContainer: {
     height: 600,
     position: "relative",
+    overflow: "auto",
     display: "flex",
     flexDirection: "column",
   },
@@ -39,7 +40,7 @@ export default function MyProfile() {
     dispatch(fetchProfile(user.id));
   }, [dispatch, user.id]);
 
-  console.log("WHATS PROIFLE?", profile);
+  console.log("WHATS PROIFLE?", profile.id);
   return (
     <Card className={classes.root} raised={true}>
       <CardHeader
@@ -51,18 +52,32 @@ export default function MyProfile() {
         avatar={<Avatar alt="profile icon" src={user.imageUrl} />}
       />
       <Divider />
-      <CardContent>
-        <div className={classes.chartContainer}>
-          <div className="profileItem">
-            <h5>My writing style</h5>
-            <p>{profile.writingStyle}</p>
+      {profile.id !== undefined ? (
+        <CardContent>
+          <div className={classes.chartContainer}>
+            <div className="profileItem">
+              <h5>My skills</h5>
+              <span>
+                I translate from...{" "}
+                <Button size="small" variant="outlined" color="secondary">
+                  add
+                </Button>
+              </span>
+            </div>
+            <div className="profileItem">
+              <Divider variant="middle" />
+            </div>
+            <div className="profileItem">
+              <h5>My writing style</h5>
+              <p>{profile.writingStyle}</p>
+              <h5>My experience</h5>
+              <p>{profile.experience}</p>
+            </div>
           </div>
-          <div className="profileItem">
-            <h5>My experience</h5>
-            <p>{profile.experience}</p>
-          </div>
-        </div>
-      </CardContent>
+        </CardContent>
+      ) : (
+        <Loading />
+      )}
     </Card>
   );
 }

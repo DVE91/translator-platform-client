@@ -48,7 +48,9 @@ export default function JobFeed(props) {
               </Button>
             </Link>
           ) : (
-            <span>Submitted</span>
+            <Button variant="contained" color="primary" size="small">
+              submitted
+            </Button>
           )}
           <p>deadline: {moment(props.deadline).format("MMMM Do YYYY")}</p>
           <MobileStepper

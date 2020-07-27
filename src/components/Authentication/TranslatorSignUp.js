@@ -14,7 +14,7 @@ import Container from "@material-ui/core/Container";
 import { useStylesSignUp } from "../../style/authentication/SignUp";
 import { selectToken } from "../../store/user/selectors";
 import { signUpTranslator } from "../../store/user/actions";
-import { rgbToHex } from "@material-ui/core";
+import MySnackbar from "../MySnackbar";
 
 export default function TranslatorSignUp() {
   const classes = useStylesSignUp();
@@ -168,6 +168,7 @@ export default function TranslatorSignUp() {
             </Grid>
           </Grid>
         </form>
+        <MySnackbar />
       </div>
       <Box mt={5}></Box>
     </Container>

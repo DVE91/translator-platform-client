@@ -15,12 +15,14 @@ import {
 import Avatar from "@material-ui/core/Avatar";
 import WorkOutlineRoundedIcon from "@material-ui/icons/WorkOutlineRounded";
 import JobFeed from "./JobFeed";
+import Loading from "../Loading";
 
 const useStyles = makeStyles(() => ({
   root: {},
   chartContainer: {
     height: 600,
     position: "relative",
+    overflow: "auto",
   },
   actions: {
     justifyContent: "flex-end",
@@ -40,30 +42,37 @@ export default function MyJob() {
     dispatch(fetchJobs(user.id));
   }, [dispatch, user.id]);
 
+  const sortedJobs = [...jobs].sort(function (a, b) {
+    return new Date(b.endDate) - new Date(a.endDate);
+  });
+
   return (
     <div>
       {" "}
-      {!jobs ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <Card className={classes.root} raised={true}>
-            <CardHeader
-              title={
-                <Typography gutterBottom component="h2" variant="button">
-                  My Jobs
-                </Typography>
-              }
-              avatar={
-                <Avatar aria-label="jobs" className={classes.avatar}>
-                  <WorkOutlineRoundedIcon />
-                </Avatar>
-              }
-            />
-            <Divider />
+      <div>
+        <Card className={classes.root} raised={true}>
+          <CardHeader
+            title={
+              <Typography gutterBottom component="h2" variant="button">
+                My Jobs
+              </Typography>
+            }
+            avatar={
+              <Avatar aria-label="jobs" className={classes.avatar}>
+                <WorkOutlineRoundedIcon />
+              </Avatar>
+            }
+          />
+          <Divider />
+          {jobs.length === 0 ? (
+            <div>
+              <Loading />
+              no jobs yet
+            </div>
+          ) : (
             <CardContent>
               <div className={classes.chartContainer}>
-                {jobs.map((job) => (
+                {sortedJobs.map((job) => (
                   <JobFeed
                     key={job.id}
                     id={job.id}
@@ -77,9 +86,9 @@ export default function MyJob() {
                 ))}
               </div>
             </CardContent>
-          </Card>
-        </div>
-      )}
+          )}
+        </Card>
+      </div>
     </div>
   );
 }

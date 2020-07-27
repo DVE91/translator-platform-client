@@ -1,5 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
+import { showError, showMessage } from "../appState/actions";
 
 export function documentUploaded(file) {
   console.log("WHATS PAYLOAD DOC?", file);
@@ -55,9 +56,13 @@ export function profileAdded(id) {
 export const createOrder = () => {
   return async (dispatch, getState) => {
     const newJob = getState().order;
-
-    const response = await axios.post(`${apiUrl}/user/order`, newJob);
-
-    console.log("WHATS RESPONSE?", response.data);
+    try {
+      const response = await axios.post(`${apiUrl}/user/order`, newJob);
+      console.log("WHATS ORDER RESPONSE?", response.data);
+      dispatch(showMessage());
+    } catch (error) {
+      console.log(error.response.data.message);
+      dispatch(showError());
+    }
   };
 };

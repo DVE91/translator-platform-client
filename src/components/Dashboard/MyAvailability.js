@@ -11,8 +11,7 @@ import {
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import EventAvailableRoundedIcon from "@material-ui/icons/EventAvailableRounded";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import Loading from "../Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
