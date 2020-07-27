@@ -1,6 +1,9 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProfile } from "../../store/dashboard/actions";
+import { selectProfile } from "../../store/dashboard/selectors";
 import { makeStyles } from "@material-ui/styles";
-import { useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import {
   Card,
@@ -12,16 +15,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import WorkOutlineRoundedIcon from "@material-ui/icons/WorkOutlineRounded";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 const useStyles = makeStyles(() => ({
   root: {},
   chartContainer: {
     height: 600,
     position: "relative",
-    display: "flex-inline",
+    display: "flex",
     flexDirection: "column",
   },
   actions: {
@@ -32,7 +32,14 @@ const useStyles = makeStyles(() => ({
 export default function MyProfile() {
   const classes = useStyles();
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const profile = useSelector(selectProfile);
 
+  useEffect(() => {
+    dispatch(fetchProfile(user.id));
+  }, [dispatch, user.id]);
+
+  console.log("WHATS PROIFLE?", profile);
   return (
     <Card className={classes.root} raised={true}>
       <CardHeader
@@ -45,7 +52,16 @@ export default function MyProfile() {
       />
       <Divider />
       <CardContent>
-        <div className={classes.chartContainer}></div>
+        <div className={classes.chartContainer}>
+          <div className="profileItem">
+            <h5>My writing style</h5>
+            <p>{profile.writingStyle}</p>
+          </div>
+          <div className="profileItem">
+            <h5>My experience</h5>
+            <p>{profile.experience}</p>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );

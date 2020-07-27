@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchJobs, jobsFetched } from "../../store/dashboard/actions";
+import { fetchJobs } from "../../store/dashboard/actions";
 import { selectJobs } from "../../store/dashboard/selectors";
 import { selectUser } from "../../store/user/selectors";
 import { makeStyles } from "@material-ui/styles";

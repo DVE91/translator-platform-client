@@ -11,10 +11,10 @@ import {
   Button,
 } from "@material-ui/core";
 
-export default function TranslatedDocument() {
+export default function TranslatedDocument(props) {
   const dispatch = useDispatch();
   const [savedTranslation, set_savedTranslation] = useState("");
-  const [translation, set_translation] = useState("");
+  const [translation, set_translation] = useState(props.savedText);
   const [submitted, set_submitted] = useState(false);
 
   const autosaveInterval = 2000;

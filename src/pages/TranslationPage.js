@@ -42,17 +42,17 @@ export default function TranslationPage() {
   const history = useHistory();
   const allJobs = useSelector(selectJobs);
 
+  const singleJob = allJobs.find(function (job) {
+    return parseInt(id) === job.id;
+  });
+
   useEffect(() => {
     if (token === null || user.isTranslator === false) {
       history.push("/");
     } else {
       dispatch(fetchJobs(user.id));
     }
-  }, [token, history, dispatch, user.isTranslator]);
-
-  const singleJob = allJobs.find(function (job) {
-    return parseInt(id) === job.id;
-  });
+  }, [token, history, dispatch, user.isTranslator, allJobs]);
 
   return (
     <div>
@@ -91,7 +91,7 @@ export default function TranslationPage() {
             </Grid>
             <Grid item xs={6}>
               <Card className={classes.card} elevation={3}>
-                <TranslatedDocument />
+                <TranslatedDocument savedText={singleJob.translatedDocument} />
               </Card>
             </Grid>
           </Grid>
