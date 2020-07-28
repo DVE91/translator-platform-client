@@ -53,9 +53,8 @@ export default function TranslationPage() {
     } else {
       dispatch(fetchJobs(user.id));
     }
-  }, [token, history, dispatch, user.isTranslator, allJobs[id]]);
+  }, [token, history, dispatch, user.isTranslator, user.id, allJobs[id]]);
 
-  console.log("RENDER TEST TRANSLATIONPAGE");
 
   return (
     <div>

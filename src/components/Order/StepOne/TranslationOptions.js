@@ -83,9 +83,9 @@ export default function TranslationOptions() {
           }}
         >
           <option aria-label="None" value="" />
-          {languages.map((languagePair, i) => (
-            <option value={languagePair.originalLanguage} key={i}>
-              {languagePair.originalLanguage}
+          {languages.map((language, i) => (
+            <option value={language.title} key={i}>
+              {language.title}
             </option>
           ))}
         </Select>
@@ -106,9 +106,9 @@ export default function TranslationOptions() {
           }}
         >
           <option aria-label="None" value="" />
-          {languages.map((languagePair, i) => (
-            <option value={languagePair.nativeLanguage} key={i}>
-              {languagePair.nativeLanguage}
+          {languages.map((language, i) => (
+            <option value={language.title} key={i}>
+              {language.title}
             </option>
           ))}
         </Select>

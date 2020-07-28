@@ -1,8 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProfile } from "../../store/dashboard/actions";
-import { selectProfile } from "../../store/dashboard/selectors";
+import { fetchProfile, fetchSkills } from "../../store/dashboard/actions";
+import { selectProfile, selectSkills } from "../../store/dashboard/selectors";
+import { fetchLanguages } from "../../store/translation/actions";
+import { selectLanguages } from "../../store/translation/selectors";
 import { makeStyles } from "@material-ui/styles";
 import { selectUser } from "../../store/user/selectors";
 import {
@@ -15,12 +17,13 @@ import {
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Loading from "../Loading";
+import SkillFeed from "./SkillFeed";
+import Skill from "./Skill";
 
 const useStyles = makeStyles(() => ({
   root: {},
   chartContainer: {
     height: 600,
-    position: "relative",
     overflow: "auto",
     display: "flex",
     flexDirection: "column",
@@ -31,16 +34,33 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function MyProfile() {
+  const [addSkill, set_addSkill] = useState(false);
+
   const classes = useStyles();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const profile = useSelector(selectProfile);
+  const skills = useSelector(selectSkills);
+  const languages = useSelector(selectLanguages);
 
   useEffect(() => {
     dispatch(fetchProfile(user.id));
   }, [dispatch, user.id]);
 
-  console.log("WHATS PROIFLE?", profile.id);
+  useEffect(() => {
+    dispatch(fetchSkills(user.id));
+  }, [dispatch, user.id]);
+
+  useEffect(() => {
+    dispatch(fetchLanguages());
+  }, [dispatch]);
+
+  const cancelAddSkill = () => {
+    set_addSkill(false);
+  };
+
+  console.log("What are languages?", languages);
+
   return (
     <Card className={classes.root} raised={true}>
       <CardHeader
@@ -52,20 +72,31 @@ export default function MyProfile() {
         avatar={<Avatar alt="profile icon" src={user.imageUrl} />}
       />
       <Divider />
-      {profile.id !== undefined ? (
+      {profile.id !== undefined && languages.length !== 0 ? (
         <CardContent>
           <div className={classes.chartContainer}>
             <div className="profileItem">
               <h5>My skills</h5>
               <span>
-                I translate from...{" "}
-                <Button size="small" variant="outlined" color="secondary">
+                I translate...{" "}
+                <Button
+                  size="small"
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => set_addSkill(true)}
+                >
                   add
                 </Button>
+                {addSkill ? <Skill cancelAddSkill={cancelAddSkill} /> : null}
+                {/* {skills.map((skill, i) => (
+                  <SkillFeed languages={languages} key={i} />
+                ))} */}
               </span>
             </div>
             <div className="profileItem">
+              <br />
               <Divider variant="middle" />
+              <br />
             </div>
             <div className="profileItem">
               <h5>My writing style</h5>

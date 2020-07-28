@@ -8,6 +8,13 @@ export const jobsFetched = (jobs) => {
   };
 };
 
+export const skillsFetched = (skills) => {
+  return {
+    type: "SKILLS_FETCHED",
+    payload: skills,
+  };
+};
+
 export const profileFetched = (profile) => {
   return {
     type: "PROFILE_FETCHED",
@@ -28,6 +35,29 @@ export const fetchProfile = (userId) => {
       });
       const profile = response.data.profile;
       dispatch(profileFetched(profile));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const fetchSkills = (userId) => {
+  return async function (dispatch, getState) {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const response = await axios.get(`${apiUrl}/user/${id}/skills`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const skills = response.data.skills;
+      dispatch(skillsFetched(skills));
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
