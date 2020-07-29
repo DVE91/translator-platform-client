@@ -59,7 +59,7 @@ export default function MyProfile() {
     set_addSkill(false);
   };
 
-  console.log("What are languages?", languages);
+  console.log("LANGUAGES?", languages, "AND SKILLS?", skills);
 
   return (
     <Card className={classes.root} raised={true}>
@@ -72,7 +72,9 @@ export default function MyProfile() {
         avatar={<Avatar alt="profile icon" src={user.imageUrl} />}
       />
       <Divider />
-      {profile.id !== undefined && languages.length !== 0 ? (
+      {profile.id !== undefined &&
+      skills.length !== 0 &&
+      languages.length !== 0 ? (
         <CardContent>
           <div className={classes.chartContainer}>
             <div className="profileItem">
@@ -87,10 +89,10 @@ export default function MyProfile() {
                 >
                   add
                 </Button>
-                {addSkill ? <Skill cancelAddSkill={cancelAddSkill} /> : null}
-                {/* {skills.map((skill, i) => (
-                  <SkillFeed languages={languages} key={i} />
-                ))} */}
+                {addSkill ? <Skill languages={languages} cancelAddSkill={cancelAddSkill} /> : null}
+                {skills.map((skill, i) => (
+                  <SkillFeed skills={skill} languages={languages} key={i} />
+                ))}
               </span>
             </div>
             <div className="profileItem">

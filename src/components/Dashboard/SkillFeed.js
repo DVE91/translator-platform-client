@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Button, Select, FormControl, InputLabel } from "@material-ui/core";
 
 export default function SkillFeed(props) {
-  const [originalLanguage, set_originalLanguage] = useState("Dutch");
-  const [nativeLanguage, set_nativeLanguage] = useState("French");
+  const original = props.skills.originalLanguage.title;
+  const native = props.skills.nativeLanguage.title;
+  const [originalLanguage, set_originalLanguage] = useState(original);
+  const [nativeLanguage, set_nativeLanguage] = useState(native);
 
   function originalLanguageHandler(language) {
     set_originalLanguage(language);
@@ -19,6 +21,9 @@ export default function SkillFeed(props) {
   function deleteSkillHandler(skillId) {
     //send dispatch to delete skill action
   }
+
+  console.log("WHATS PROPS SKILL", props.skills);
+  console.log("WHATS PROP LANGUAGE", props.languages);
 
   return (
     <div>
@@ -65,7 +70,7 @@ export default function SkillFeed(props) {
         <br />
 
         <Button
-          style={{ width: "25px" }}
+          style={{ width: "30px" }}
           variant="contained"
           color="primary"
           size="small"

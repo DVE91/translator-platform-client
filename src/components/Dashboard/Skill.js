@@ -3,69 +3,57 @@ import { useState } from "react";
 import { Button, Select, FormControl, InputLabel } from "@material-ui/core";
 
 export default function Skill(props) {
-  const [originalLanguage, set_originalLanguage] = useState("Select language");
-  const [nativeLanguage, set_nativeLanguage] = useState("Select language");
-
-  function originalLanguageHandler(language) {
-    set_originalLanguage(language);
-    //dispatch(skillAdded(language));
-  }
-
-  function nativeLanguageHandler(language) {
-    set_nativeLanguage(language);
-    //dispatch(skillAdded(language));
-  }
+  const [originalLanguage, set_originalLanguage] = useState("");
+  const [nativeLanguage, set_nativeLanguage] = useState("");
 
   function addSkillHandler(event) {
-    event.preventDefault();
+    console.log("Add skill");
+    // event.preventDefault();
     //send dispatch(originalLanguage, nativeLanguage) to add skill action
   }
 
   return (
     <div>
       <FormControl variant="outlined" className="formControl">
-        <InputLabel htmlFor="outlined-original-native-simple">From:</InputLabel>
+        <h6>From:</h6>
         <Select
           native
           value={originalLanguage}
-          onChange={(e) => originalLanguageHandler(e.target.value)}
+          onChange={(e) => set_originalLanguage(e.target.value)}
           label=""
           inputProps={{
             name: "old language",
             id: "outlined-original-native-simple",
           }}
         >
-          {props.languages.map((languagePair, i) => (
-            <option value={languagePair.originalLanguage} key={i}>
-              {languagePair.originalLanguage}
+          {props.languages.map((language, i) => (
+            <option value={language.title} key={i}>
+              {language.title}
             </option>
           ))}
         </Select>
       </FormControl>
       <FormControl variant="outlined" className="formControl">
-        {/* <InputLabel htmlFor="outlined-native-native-simple">
-          To my native language:
-        </InputLabel> */}
-        <h5>
-          To my native language:
-          <Select
-            native
-            value={nativeLanguage}
-            onChange={(e) => nativeLanguageHandler(e.target.value)}
-            label=""
-            inputProps={{
-              name: "native language",
-              id: "outlined-native-native-simple",
-            }}
-          >
-            {props.languages.map((language, i) => (
-              <option value={language} key={i}>
-                {language}
-              </option>
-            ))}
-          </Select>
-        </h5>
+        <h6>To my native language:</h6>
+        <Select
+          native
+          value={nativeLanguage}
+          onChange={(e) => set_nativeLanguage(e.target.value)}
+          label=""
+          inputProps={{
+            name: "native language",
+            id: "outlined-native-native-simple",
+          }}
+        >
+          {props.languages.map((language, i) => (
+            <option value={language.title} key={i}>
+              {language.title}
+            </option>
+          ))}
+        </Select>
+
         <Button
+          style={{ width: "30px" }}
           type="submit"
           variant="contained"
           color="secondary"
@@ -75,6 +63,7 @@ export default function Skill(props) {
           add
         </Button>
         <Button
+          style={{ width: "30px" }}
           variant="contained"
           color="primary"
           size="small"

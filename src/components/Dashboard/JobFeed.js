@@ -37,6 +37,7 @@ export default function JobFeed(props) {
       <div className="container">
         <div>
           <h5>title: {props.title}</h5>
+          <span>word count: {props.wordCount}</span>
           <h6>type: {props.type}</h6>
         </div>
 

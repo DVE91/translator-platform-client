@@ -1,7 +1,7 @@
 const initialState = {
   jobs: [],
   profile: {},
-  skills: [{ originalLanguage: "French", nativeLanguage: "German" }],
+  skills: [],
 };
 
 export default function DashboardSliceReducer(state = initialState, action) {
@@ -11,7 +11,7 @@ export default function DashboardSliceReducer(state = initialState, action) {
     case "PROFILE_FETCHED":
       return { ...state, profile: action.payload };
     case "SKILLS_FETCHED":
-      return { ...state, skills: [...state.skills, action.payload] };
+      return { ...state, skills: action.payload };
     default:
       return state;
   }
