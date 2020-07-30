@@ -109,7 +109,6 @@ export const deleteSkill = (skillId) => {
   return async (dispatch, getState) => {
     const token = getState().user.token;
     const id = getState().user.id;
-    console.log("parameters?", token, id);
     try {
       const response = await axios.delete(
         `${apiUrl}/user/${id}/skills/${skillId}`,
@@ -119,8 +118,6 @@ export const deleteSkill = (skillId) => {
           },
         }
       );
-
-      console.log("WHATS DELETE RESPONSE DATA?", response.data);
       dispatch(skillDeleted(skillId));
     } catch (error) {
       if (error.response) {

@@ -31,12 +31,16 @@ export default function TranslatorCard(props) {
         {props.profile.user.fullName}
       </h4>
       <p>
-        <strong>writing style: </strong>
+        <strong>About my writing style: </strong>
         {props.profile.writingStyle}
       </p>
       <p>
-        <strong>Experience: </strong>
+        <strong>About my experience: </strong>
         {props.profile.experience}
+      </p>
+      <p>
+        <strong>My rate: </strong>€ {props.profile.finance.centsPerWord} cents
+        per word.
       </p>
 
       <ToggleButton

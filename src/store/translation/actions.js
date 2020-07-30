@@ -23,11 +23,11 @@ export const fetchLanguages = () => {
   };
 };
 
-export const fetchProfiles = () => {
+export const fetchProfiles = (originalLanguage, nativeLanguage) => {
+  console.log("whats languages in FETCH?", originalLanguage, nativeLanguage);
   return async (dispatch, getState) => {
-    const profilesCount = getState().translation.profiles.length;
     const response = await axios.get(
-      `${apiUrl}/translators?limit=${defaultPaginationLimit}&offset=${profilesCount}`
+      `${apiUrl}/translators?originalLanguage=${originalLanguage}&nativeLanguage=${nativeLanguage}`
     );
     dispatch(profilesFetched(response.data.profiles.rows));
   };
