@@ -4,6 +4,7 @@ import OrderSliceReducer from "./order/reducer";
 import TranslationSliceReducer from "./translation/reducer";
 import DashboardSliceReducer from "./dashboard/reducer";
 import appStateSliceReducer from "./appState/reducer";
+import PaymentSliceReducer from "./payment/reducer";
 
 const reducer = combineReducers({
   user: UserSliceReducer,
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   translation: TranslationSliceReducer,
   dashboard: DashboardSliceReducer,
   appState: appStateSliceReducer,
+  payment: PaymentSliceReducer,
 });
 
 export default reducer;

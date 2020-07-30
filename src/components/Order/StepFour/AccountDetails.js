@@ -26,9 +26,9 @@ export default function AccountDetails() {
           onChange={accountHandleChange}
         >
           <FormControlLabel
-            value="Make a new account *TODO"
+            value="Make a new account"
             control={<Radio />}
-            label="Make a new account *TODO"
+            label="Make a new account"
           />
           <FormControlLabel
             value="Place order without account"

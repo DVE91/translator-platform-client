@@ -15,6 +15,13 @@ export const skillsFetched = (skills) => {
   };
 };
 
+export const skillDeleted = (skillId) => {
+  return {
+    type: "SKILL_DELETED",
+    payload: skillId,
+  };
+};
+
 export const profileFetched = (profile) => {
   return {
     type: "PROFILE_FETCHED",
@@ -58,6 +65,63 @@ export const fetchSkills = (userId) => {
       });
       const skills = response.data.skills;
       dispatch(skillsFetched(skills));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const addSkill = (originalLanguage, nativeLanguage, userId) => {
+  return async function (dispatch, getState) {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const response = await axios.post(
+        `${apiUrl}/user/${id}/skills`,
+        {
+          originalLanguage,
+          nativeLanguage,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const skills = response.data.skills;
+      dispatch(skillsFetched(skills));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const deleteSkill = (skillId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const id = getState().user.id;
+    console.log("parameters?", token, id);
+    try {
+      const response = await axios.delete(
+        `${apiUrl}/user/${id}/skills/${skillId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("WHATS DELETE RESPONSE DATA?", response.data);
+      dispatch(skillDeleted(skillId));
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);

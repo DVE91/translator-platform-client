@@ -1,29 +1,17 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteSkill } from "../../store/dashboard/actions";
 import { Button, Select, FormControl, InputLabel } from "@material-ui/core";
 
 export default function SkillFeed(props) {
+  const dispatch = useDispatch();
   const original = props.skills.originalLanguage.title;
   const native = props.skills.nativeLanguage.title;
   const [originalLanguage, set_originalLanguage] = useState(original);
   const [nativeLanguage, set_nativeLanguage] = useState(native);
 
-  function originalLanguageHandler(language) {
-    set_originalLanguage(language);
-    //dispatch(skillAdded(language));
-  }
-
-  function nativeLanguageHandler(language) {
-    set_nativeLanguage(language);
-    //dispatch(skillAdded(language));
-  }
-
-  function deleteSkillHandler(skillId) {
-    //send dispatch to delete skill action
-  }
-
-  console.log("WHATS PROPS SKILL", props.skills);
-  console.log("WHATS PROP LANGUAGE", props.languages);
+  console.log("SHOW ME ID", props.id);
 
   return (
     <div>
@@ -32,7 +20,7 @@ export default function SkillFeed(props) {
         <Select
           native
           value={originalLanguage}
-          onChange={(e) => originalLanguageHandler(e.target.value)}
+          onChange={(e) => set_originalLanguage(e.target.value)}
           label=""
           inputProps={{
             name: "old language",
@@ -53,7 +41,7 @@ export default function SkillFeed(props) {
         <Select
           native
           value={nativeLanguage}
-          onChange={(e) => nativeLanguageHandler(e.target.value)}
+          onChange={(e) => set_nativeLanguage(e.target.value)}
           label=""
           inputProps={{
             name: "native language",
@@ -74,7 +62,7 @@ export default function SkillFeed(props) {
           variant="contained"
           color="primary"
           size="small"
-          onClick={deleteSkillHandler(props.id)}
+          onClick={() => dispatch(deleteSkill(props.id))}
         >
           delete
         </Button>

@@ -1,16 +1,21 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../store/user/selectors";
+import { addSkill } from "../../store/dashboard/actions";
 import { Button, Select, FormControl, InputLabel } from "@material-ui/core";
 
 export default function Skill(props) {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const [originalLanguage, set_originalLanguage] = useState("");
   const [nativeLanguage, set_nativeLanguage] = useState("");
 
-  function addSkillHandler(event) {
-    console.log("Add skill");
-    // event.preventDefault();
-    //send dispatch(originalLanguage, nativeLanguage) to add skill action
-  }
+  const addSkillHandler = () => {
+    console.log("Add skill in handler");
+    dispatch(addSkill(originalLanguage, nativeLanguage, user.id));
+    props.cancelAddSkill();
+  };
 
   return (
     <div>
@@ -26,6 +31,7 @@ export default function Skill(props) {
             id: "outlined-original-native-simple",
           }}
         >
+          <option aria-label="None" value="" />
           {props.languages.map((language, i) => (
             <option value={language.title} key={i}>
               {language.title}
@@ -45,6 +51,7 @@ export default function Skill(props) {
             id: "outlined-native-native-simple",
           }}
         >
+          <option aria-label="None" value="" />
           {props.languages.map((language, i) => (
             <option value={language.title} key={i}>
               {language.title}
@@ -54,11 +61,10 @@ export default function Skill(props) {
 
         <Button
           style={{ width: "30px" }}
-          type="submit"
           variant="contained"
           color="secondary"
           size="small"
-          onClick={addSkillHandler(originalLanguage, nativeLanguage)}
+          onClick={addSkillHandler}
         >
           add
         </Button>

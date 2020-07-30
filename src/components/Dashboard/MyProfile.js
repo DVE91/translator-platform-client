@@ -59,7 +59,7 @@ export default function MyProfile() {
     set_addSkill(false);
   };
 
-  console.log("LANGUAGES?", languages, "AND SKILLS?", skills);
+  console.log("render");
 
   return (
     <Card className={classes.root} raised={true}>
@@ -72,45 +72,58 @@ export default function MyProfile() {
         avatar={<Avatar alt="profile icon" src={user.imageUrl} />}
       />
       <Divider />
-      {profile.id !== undefined &&
+      {/* {profile.id !== undefined &&
       skills.length !== 0 &&
-      languages.length !== 0 ? (
-        <CardContent>
-          <div className={classes.chartContainer}>
-            <div className="profileItem">
-              <h5>My skills</h5>
-              <span>
-                I translate...{" "}
-                <Button
-                  size="small"
-                  variant="outlined"
-                  color="secondary"
-                  onClick={() => set_addSkill(true)}
-                >
-                  add
-                </Button>
-                {addSkill ? <Skill languages={languages} cancelAddSkill={cancelAddSkill} /> : null}
-                {skills.map((skill, i) => (
-                  <SkillFeed skills={skill} languages={languages} key={i} />
-                ))}
-              </span>
-            </div>
-            <div className="profileItem">
-              <br />
-              <Divider variant="middle" />
-              <br />
-            </div>
-            <div className="profileItem">
-              <h5>My writing style</h5>
-              <p>{profile.writingStyle}</p>
-              <h5>My experience</h5>
-              <p>{profile.experience}</p>
-            </div>
+      languages.length !== 0 ? ( */}
+      <CardContent>
+        <div className={classes.chartContainer}>
+          <div className="profileItem">
+            <h5>My skills</h5>
+            <span>
+              I translate...{" "}
+              <Button
+                size="small"
+                variant="outlined"
+                color="secondary"
+                onClick={() => set_addSkill(true)}
+              >
+                add
+              </Button>
+              {addSkill ? (
+                <Skill languages={languages} cancelAddSkill={cancelAddSkill} />
+              ) : null}
+              {profile.id !== undefined &&
+              skills.length !== 0 &&
+              languages.length !== 0 ? (
+                skills.map((skill, i) => (
+                  <SkillFeed
+                    skills={skill}
+                    languages={languages}
+                    key={i}
+                    id={skill.id}
+                  />
+                ))
+              ) : (
+                <Loading />
+              )}
+            </span>
           </div>
-        </CardContent>
-      ) : (
+          <div className="profileItem">
+            <br />
+            <Divider variant="middle" style={{ marginTop: "20px" }} />
+            <br />
+          </div>
+          <div className="profileItem">
+            <h5>My writing style</h5>
+            <p>{profile.writingStyle}</p>
+            <h5>My experience</h5>
+            <p>{profile.experience}</p>
+          </div>
+        </div>
+      </CardContent>
+      {/* ) : (
         <Loading />
-      )}
+      )} */}
     </Card>
   );
 }

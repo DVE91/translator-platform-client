@@ -16,9 +16,15 @@ export default function Deadline() {
   const dispatch = useDispatch();
   const order = useSelector(selectOrder);
 
-  function disableWeekends(date) {
-    return date.getDay() === 0 || date.getDay() === 6 || new Date() === date;
-  }
+  //option to disable weekends in deadline selector
+  // function disableWeekends(date) {
+  //   return date.getDay() === 0 || date.getDay() === 6 || new Date() === date;
+  // }
+
+  const dateChangeHandler = (date) => {
+    set_Date(date);
+    dispatch(datesAdded({ start: new Date(), end: date }));
+  };
 
   function deadlineRegulator() {
     if (order.wordCount <= 4000) {
@@ -52,12 +58,12 @@ export default function Deadline() {
       <KeyboardDatePicker
         disablePast={true}
         minDate={deadlineRegulator()}
-        shouldDisableDate={disableWeekends}
+        // shouldDisableDate={disableWeekends}
         margin="normal"
         id="date-picker-dialog"
         format="MM/dd/yyyy"
         value={date}
-        onChange={set_Date}
+        onChange={dateChangeHandler}
         KeyboardButtonProps={{
           "aria-label": "change date",
         }}
