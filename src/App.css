@@ -4,6 +4,8 @@
 
 .step {
   background-color: rgb(242, 247, 255);
+  padding: 30px;
+  margin: 20px;
 }
 
 .form-control {

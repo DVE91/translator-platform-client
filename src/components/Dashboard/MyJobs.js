@@ -43,7 +43,7 @@ export default function MyJob() {
   }, [dispatch, user.id]);
 
   const sortedJobs = [...jobs].sort(function (a, b) {
-    return new Date(b.endDate) - new Date(a.endDate);
+    return new Date(a.endDate) - new Date(b.endDate);
   });
 
   return (

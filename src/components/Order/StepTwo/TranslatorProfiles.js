@@ -19,6 +19,10 @@ export default function TranslatorProfiles() {
     dispatch(fetchProfiles(originalLanguage, nativeLanguage));
   }, []);
 
+  const searchTranslators = () => {
+    dispatch(fetchProfiles(originalLanguage, nativeLanguage));
+  };
+
   return (
     <div>
       <Container maxWidth="sm">

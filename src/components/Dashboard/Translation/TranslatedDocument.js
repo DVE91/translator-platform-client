@@ -18,7 +18,7 @@ export default function TranslatedDocument(props) {
   const [savedTranslation, set_savedTranslation] = useState("");
   const [translation, set_translation] = useState(props.savedText);
 
-  const autosaveInterval = 2000;
+  const autosaveInterval = 1000;
   useEffect(() => {
     const timer = setTimeout(() => {
       if (savedTranslation !== translation) {
@@ -44,7 +44,7 @@ export default function TranslatedDocument(props) {
             Translated document
           </Typography>
         }
-        subheader="Document saves automatically every 5 seconds"
+        subheader="Document saves automatically after every change"
       />
       <Divider />
       <CardContent>

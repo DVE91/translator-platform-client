@@ -12,7 +12,6 @@ export default function Skill(props) {
   const [nativeLanguage, set_nativeLanguage] = useState("");
 
   const addSkillHandler = () => {
-    console.log("Add skill in handler");
     dispatch(addSkill(originalLanguage, nativeLanguage, user.id));
     props.cancelAddSkill();
   };

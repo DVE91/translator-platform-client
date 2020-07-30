@@ -53,13 +53,13 @@ export default function MyProfile() {
 
   useEffect(() => {
     dispatch(fetchLanguages());
-  }, [dispatch]);
+  }, [dispatch, user.id]);
 
   const cancelAddSkill = () => {
     set_addSkill(false);
   };
 
-  console.log("render");
+  console.log("rendertest");
 
   return (
     <Card className={classes.root} raised={true}>
@@ -92,9 +92,7 @@ export default function MyProfile() {
               {addSkill ? (
                 <Skill languages={languages} cancelAddSkill={cancelAddSkill} />
               ) : null}
-              {profile.id !== undefined &&
-              skills.length !== 0 &&
-              languages.length !== 0 ? (
+              {profile.id !== undefined && skills.length !== 0 ? (
                 skills.map((skill, i) => (
                   <SkillFeed
                     skills={skill}

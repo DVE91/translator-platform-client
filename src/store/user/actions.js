@@ -1,7 +1,7 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { selectToken } from "./selectors";
-import { showError, showMessage } from "../appState/actions";
+import { showError } from "../appState/actions";
 
 export const loginSuccess = (userWithToken) => {
   return {
@@ -39,11 +39,7 @@ export const login = (emailAddress, password) => {
 };
 
 //sign up customer / normal sign up
-export const signUp = (
-  fullName,
-  emailAddress,
-  password,
-) => {
+export const signUp = (fullName, emailAddress, password) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
