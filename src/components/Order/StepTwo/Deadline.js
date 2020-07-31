@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import DateFnsUtils from "@date-io/date-fns";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -17,20 +17,24 @@ export default function Deadline() {
   const order = useSelector(selectOrder);
 
   //option to disable weekends in deadline selector
-  // function disableWeekends(date) {
-  //   return date.getDay() === 0 || date.getDay() === 6 || new Date() === date;
-  // }
-
-  const dateChangeHandler = (date) => {
-    set_Date(date);
-    dispatch(datesAdded({ start: new Date(), end: date }));
+  const disableWeekends = (date) => {
+    return date.getDay() === 0 || date.getDay() === 6 || new Date() === date;
   };
 
-  function deadlineRegulator() {
+  useEffect(() => {
+    dispatch(datesAdded({ start: new Date(), end: date }));
+  }, [dispatch, date]);
+
+  //component keeps rerendering because of the datechange when larger deadline is set. Needs fixing for bigger  files.
+  const dateChangeHandler = (dates) => {
+    set_Date(dates);
+  };
+
+  const deadlineRegulator = () => {
     if (order.wordCount <= 4000) {
       return moment(new Date()).add(2, "days");
     } else if (order.wordCount > 4000 && order.wordcount <= 6000) {
-      return moment(new Date()).add(3, "days");
+      return moment(date).add(3, "days");
     } else if (order.wordCount > 6000 && order.wordcount <= 8000) {
       return moment(new Date()).add(4, "days");
     } else if (order.wordCount > 8000 && order.wordcount <= 10000) {
@@ -39,35 +43,37 @@ export default function Deadline() {
       set_tooManyWords(true);
       return moment(new Date()).add(6, "days");
     }
-  }
+  };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <h5>1. Choose the deadline</h5>
-      {tooManywords ? (
-        <div>
-          <br />
-          <h6>
-            Those are a lot of words to translate! Please do select a deadline
-            but keep in mind that the translator might get in touch with you to
-            discuss feasible deadline options.{" "}
-          </h6>
-          <br />
-        </div>
-      ) : null}
-      <KeyboardDatePicker
-        disablePast={true}
-        minDate={deadlineRegulator()}
-        // shouldDisableDate={disableWeekends}
-        margin="normal"
-        id="date-picker-dialog"
-        format="MM/dd/yyyy"
-        value={date}
-        onChange={dateChangeHandler}
-        KeyboardButtonProps={{
-          "aria-label": "change date",
-        }}
-      />
+      <>
+        <h5>1. Choose the deadline</h5>
+        {tooManywords ? (
+          <div>
+            <br />
+            <h6>
+              Those are a lot of words to translate! Please do select a deadline
+              but keep in mind that the translator might get in touch with you
+              to discuss feasible deadline options.{" "}
+            </h6>
+            <br />
+          </div>
+        ) : null}
+        <KeyboardDatePicker
+          disablePast={true}
+          // minDate={deadlineRegulator}
+          shouldDisableDate={disableWeekends}
+          margin="normal"
+          id="date-picker-dialog"
+          format="MM/dd/yyyy"
+          value={date}
+          onChange={dateChangeHandler}
+          KeyboardButtonProps={{
+            "aria-label": "change date",
+          }}
+        />
+      </>
     </MuiPickersUtilsProvider>
   );
 }

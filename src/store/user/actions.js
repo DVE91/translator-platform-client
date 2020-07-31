@@ -3,6 +3,20 @@ import axios from "axios";
 import { selectToken } from "./selectors";
 import { showError } from "../appState/actions";
 
+export const orderName = (userName) => {
+  return {
+    type: "ORDER_NAME_SET",
+    payload: userName,
+  };
+};
+
+export const orderEmail = (userEmail) => {
+  return {
+    type: "ORDER_EMAIL_SET",
+    payload: userEmail,
+  };
+};
+
 export const loginSuccess = (userWithToken) => {
   return {
     type: "LOGIN_SUCCESS",

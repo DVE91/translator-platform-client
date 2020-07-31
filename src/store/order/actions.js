@@ -56,8 +56,14 @@ export function profileAdded(id) {
 export const createOrder = () => {
   return async (dispatch, getState) => {
     const newJob = getState().order;
+    const user = getState().user;
+    const payment = getState().payment;
     try {
-      const response = await axios.post(`${apiUrl}/user/order`, newJob);
+      const response = await axios.post(`${apiUrl}/user/order`, {
+        ...newJob,
+        ...user,
+        ...payment,
+      });
       console.log("WHATS ORDER RESPONSE?", response.data);
       dispatch(showMessage());
     } catch (error) {

@@ -17,11 +17,7 @@ export default function TranslatorProfiles() {
 
   useEffect(() => {
     dispatch(fetchProfiles(originalLanguage, nativeLanguage));
-  }, []);
-
-  const searchTranslators = () => {
-    dispatch(fetchProfiles(originalLanguage, nativeLanguage));
-  };
+  }, [dispatch]);
 
   return (
     <div>
@@ -29,7 +25,9 @@ export default function TranslatorProfiles() {
         <h5>2. Select your favorite translator</h5>{" "}
         {profiles.length === 0 ? (
           <Button
-            onClick={() => dispatch(fetchProfiles())}
+            onClick={() =>
+              dispatch(fetchProfiles(originalLanguage, nativeLanguage))
+            }
             variant="outlined"
             color="primary"
             size="large"

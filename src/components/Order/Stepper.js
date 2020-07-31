@@ -82,17 +82,15 @@ export default function MyStepper() {
           </div>
         ) : (
           <div>
-            <div>
-              {activeStep === 0 ? (
-                <FileUpload />
-              ) : activeStep === 1 ? (
-                <StepTwo />
-              ) : activeStep === 2 ? (
-                <StepThree />
-              ) : (
-                <StepFour />
-              )}
-            </div>
+            {activeStep === 0 ? (
+              <FileUpload />
+            ) : activeStep === 1 ? (
+              <StepTwo />
+            ) : activeStep === 2 ? (
+              <StepThree />
+            ) : (
+              <StepFour />
+            )}
             <div>
               <br />
               <Button

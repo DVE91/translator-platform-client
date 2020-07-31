@@ -2,8 +2,8 @@ import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectJobs } from "../store/dashboard/selectors";
-import { fetchJobs } from "../store/dashboard/actions";
+import { selectJobs, selectFinances } from "../store/dashboard/selectors";
+import { fetchJobs, fetchFinances } from "../store/dashboard/actions";
 import { selectUser, selectToken } from "../store/user/selectors";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
@@ -42,6 +42,7 @@ export default function TranslationPage() {
   const user = useSelector(selectUser);
   const history = useHistory();
   const allJobs = useSelector(selectJobs);
+  const finance = useSelector(selectFinances);
 
   const singleJob = allJobs.find(function (job) {
     return parseInt(id) === job.id;
@@ -52,9 +53,12 @@ export default function TranslationPage() {
       history.push("/");
     } else {
       dispatch(fetchJobs(user.id));
+      dispatch(fetchFinances(user.Id));
     }
   }, [token, history, dispatch, user.isTranslator, user.id, allJobs[id]]);
 
+  console.log("What's single job?", singleJob);
+  console.log("what's finance id?", finance.id);
 
   return (
     <div>
@@ -94,10 +98,13 @@ export default function TranslationPage() {
             <Grid item xs={6}>
               <Card className={classes.card} elevation={3}>
                 <TranslatedDocument
-                  userId={user.id}
                   jobId={singleJob.id}
                   submitted={singleJob.submitted}
                   savedText={singleJob.translatedDocument}
+                  userName={singleJob.payment.user.fullName}
+                  userEmail={singleJob.payment.user.emailAddress}
+                  gainings={singleJob.payment.totalPrice}
+                  financeId={finance.id}
                 />
               </Card>
             </Grid>

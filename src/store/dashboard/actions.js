@@ -82,7 +82,7 @@ export const fetchFinances = (userId) => {
   };
 };
 
-export const updateFinances = (centsPerWord, userId,financeId) => {
+export const updateFinances = (centsPerWord, userId, financeId) => {
   return async (dispatch, getState) => {
     const token = getState().user.token;
     try {
@@ -109,6 +109,42 @@ export const updateFinances = (centsPerWord, userId,financeId) => {
   };
 };
 
+export const updateCurrentBalance = (gainings, userId, financeId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const financeResponse = await axios.get(`${apiUrl}/user/${id}/finance`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const financeOverview = financeResponse.data.finances;
+      const newBalance = financeOverview.currentBalance + gainings;
+
+      const response = await axios.patch(
+        `${apiUrl}/user/${userId}/finance/${financeId}`,
+        {
+          currentBalance: newBalance,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const finances = response.data.finances;
+      dispatch(financesFetched(finances));
+    } catch (error) {
+      if (error.response) {
+        console.log("error", error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
 
 export const fetchSkills = (userId) => {
   return async function (dispatch, getState) {
