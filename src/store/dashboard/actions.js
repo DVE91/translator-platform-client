@@ -8,10 +8,31 @@ export const jobsFetched = (jobs) => {
   };
 };
 
+export const skillsFetched = (skills) => {
+  return {
+    type: "SKILLS_FETCHED",
+    payload: skills,
+  };
+};
+
+export const skillDeleted = (skillId) => {
+  return {
+    type: "SKILL_DELETED",
+    payload: skillId,
+  };
+};
+
 export const profileFetched = (profile) => {
   return {
     type: "PROFILE_FETCHED",
     payload: profile,
+  };
+};
+
+export const financesFetched = (finance) => {
+  return {
+    type: "FINANCES_FETCHED",
+    payload: finance,
   };
 };
 
@@ -28,6 +49,170 @@ export const fetchProfile = (userId) => {
       });
       const profile = response.data.profile;
       dispatch(profileFetched(profile));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const fetchFinances = (userId) => {
+  return async function (dispatch, getState) {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const response = await axios.get(`${apiUrl}/user/${id}/finance`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const finances = response.data.finances;
+      dispatch(financesFetched(finances));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const updateFinances = (centsPerWord, userId, financeId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/user/${userId}/finance/${financeId}`,
+        {
+          centsPerWord,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const finances = response.data.finances;
+      dispatch(financesFetched(finances));
+    } catch (error) {
+      if (error.response) {
+        console.log("error", error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const updateCurrentBalance = (gainings, userId, financeId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const financeResponse = await axios.get(`${apiUrl}/user/${id}/finance`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const financeOverview = financeResponse.data.finances;
+      const newBalance = financeOverview.currentBalance + gainings;
+
+      const response = await axios.patch(
+        `${apiUrl}/user/${userId}/finance/${financeId}`,
+        {
+          currentBalance: newBalance,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const finances = response.data.finances;
+      dispatch(financesFetched(finances));
+    } catch (error) {
+      if (error.response) {
+        console.log("error", error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const fetchSkills = (userId) => {
+  return async function (dispatch, getState) {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const response = await axios.get(`${apiUrl}/user/${id}/skills`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const skills = response.data.skills;
+      dispatch(skillsFetched(skills));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const addSkill = (originalLanguage, nativeLanguage, userId) => {
+  return async function (dispatch, getState) {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const response = await axios.post(
+        `${apiUrl}/user/${id}/skills`,
+        {
+          originalLanguage,
+          nativeLanguage,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const skills = response.data.skills;
+      dispatch(skillsFetched(skills));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const deleteSkill = (skillId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const id = getState().user.id;
+    try {
+      const response = await axios.delete(
+        `${apiUrl}/user/${id}/skills/${skillId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(skillDeleted(skillId));
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);

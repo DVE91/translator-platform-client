@@ -1,5 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { orderName, orderEmail } from "../../../store/user/actions";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,12 +21,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function WithoutAccount() {
+  const dispatch = useDispatch();
   const [name, set_name] = useState("");
+  const [savedName, set_savedName] = useState(name);
   const [email, set_email] = useState("");
+  const [savedEmail, set_savedEmail] = useState(email);
   const classes = useStyles();
 
-  // value={title}
-  // onChange={(e) => titleChangeHandler(e.target.value)}
+  const autosaveInterval = 200;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (savedName !== name) {
+        dispatch(orderName(name));
+        set_savedName(name);
+      }
+    }, autosaveInterval);
+    return () => clearTimeout(timer);
+  }, [name]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (savedEmail !== email) {
+        dispatch(orderEmail(email));
+        set_savedEmail(email);
+      }
+    }, autosaveInterval);
+    return () => clearTimeout(timer);
+  }, [email]);
 
   return (
     <Container component="main" maxWidth="xs">

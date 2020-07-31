@@ -1,7 +1,21 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
 import { selectToken } from "./selectors";
-import { showError, showMessage } from "../appState/actions";
+import { showError } from "../appState/actions";
+
+export const orderName = (userName) => {
+  return {
+    type: "ORDER_NAME_SET",
+    payload: userName,
+  };
+};
+
+export const orderEmail = (userEmail) => {
+  return {
+    type: "ORDER_EMAIL_SET",
+    payload: userEmail,
+  };
+};
 
 export const loginSuccess = (userWithToken) => {
   return {
@@ -25,6 +39,28 @@ export const login = (emailAddress, password) => {
         password,
       });
 
+      dispatch(loginSuccess(response.data));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(showError());
+      } else {
+        console.log(error.message);
+        dispatch(showError());
+      }
+    }
+  };
+};
+
+//sign up customer / normal sign up
+export const signUp = (fullName, emailAddress, password) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await axios.post(`${apiUrl}/signup`, {
+        fullName,
+        emailAddress,
+        password,
+      });
       dispatch(loginSuccess(response.data));
     } catch (error) {
       if (error.response) {

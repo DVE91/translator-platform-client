@@ -6,6 +6,10 @@ const initialState = {
 
 export default function UserSliceReducer(state = initialState, action) {
   switch (action.type) {
+    case "ORDER_NAME_SET":
+      return { ...state, fullName: action.payload };
+    case "ORDER_EMAIL_SET":
+      return { ...state, emailAddress: action.payload };
     case "LOGIN_SUCCESS":
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };

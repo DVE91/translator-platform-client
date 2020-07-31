@@ -1,5 +1,6 @@
-import { apiUrl, defaultPaginationLimit } from "../../config/constants";
+import { apiUrl } from "../../config/constants";
 import axios from "axios";
+import { showError } from "../appState/actions";
 
 export function languagesFetched(languages) {
   return {
@@ -23,12 +24,21 @@ export const fetchLanguages = () => {
   };
 };
 
-export const fetchProfiles = () => {
+export const fetchProfiles = (originalLanguage, nativeLanguage) => {
   return async (dispatch, getState) => {
-    const profilesCount = getState().translation.profiles.length;
-    const response = await axios.get(
-      `${apiUrl}/translators?limit=${defaultPaginationLimit}&offset=${profilesCount}`
-    );
-    dispatch(profilesFetched(response.data.profiles.rows));
+    try {
+      const response = await axios.get(
+        `${apiUrl}/translators?originalLanguage=${originalLanguage}&nativeLanguage=${nativeLanguage}`
+      );
+      dispatch(profilesFetched(response.data.profiles.rows));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(showError());
+      } else {
+        console.log(error.message);
+        dispatch(showError());
+      }
+    }
   };
 };

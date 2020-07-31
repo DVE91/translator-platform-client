@@ -5,7 +5,7 @@ import SignUp from "../../components/Authentication/SignUp";
 export default function SignUpPage() {
   return (
     <Container>
-      <SignUp />
+      <SignUp redirect={true} />
     </Container>
   );
 }
