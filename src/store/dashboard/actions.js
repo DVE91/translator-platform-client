@@ -36,6 +36,26 @@ export const financesFetched = (finance) => {
   };
 };
 
+export const availabilityFetched = (availability) => {
+  return {
+    type: "AVAILABILITY_FETCHED",
+    payload: availability,
+  };
+};
+
+export const availabilityUpdated = (availability) => {
+  return {
+    type: "AVAILABILITY_UPDATED",
+    payload: availability,
+  };
+};
+
+export const availabilityCleared= () => {
+  return {
+    type: "AVAILABILITY_CLEARED"
+  }
+}
+
 export const fetchProfile = (userId) => {
   return async function (dispatch, getState) {
     const token = getState().user.token;
@@ -52,6 +72,80 @@ export const fetchProfile = (userId) => {
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const fetchAvailability = (userId) => {
+  return async function (dispatch, getState) {
+    const token = getState().user.token;
+    const id = userId;
+
+    try {
+      const response = await axios.get(`${apiUrl}/user/${id}/availability`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const availability = response.data.availability;
+      dispatch(availabilityFetched(availability));
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const clearAvailability = (userId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const id = userId;
+    try {
+      const response = await axios.delete(`${apiUrl}/user/${id}/availability`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(availabilityCleared());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+      } else {
+        console.log(error.message);
+      }
+    }
+  };
+};
+
+export const updateAvailability = (dates, userId) => {
+  return async (dispatch, getState) => {
+    const token = getState().user.token;
+    const id = userId;
+    console.log("whats dates in thunk?", dates);
+
+    try {
+      const response = await axios.post(
+        `${apiUrl}/user/${id}/availability/`,
+        {
+          dates,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const availability = response.data.availability;
+      dispatch(availabilityUpdated(availability));
+    } catch (error) {
+      if (error.response) {
+        console.log("error", error.response.data.message);
       } else {
         console.log(error.message);
       }

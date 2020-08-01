@@ -14,6 +14,18 @@ export default function DashboardSliceReducer(state = initialState, action) {
       return { ...state, profile: action.payload };
     case "FINANCES_FETCHED":
       return { ...state, finances: action.payload };
+    case "AVAILABILITY_FETCHED":
+      const datesFromAvailability = action.payload.map(
+        (availability) => availability.date
+      );
+      return { ...state, availability: datesFromAvailability };
+    case "AVAILABILITY_UPDATED":
+      return {
+        ...state,
+        availability: [...state.availability, action.payload.date],
+      };
+    case "AVAILABILITY_CLEARED":
+      return { ...state, availability: [] };
     case "SKILLS_FETCHED":
       return { ...state, skills: action.payload };
     case "SKILL_DELETED":

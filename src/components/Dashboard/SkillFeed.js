@@ -11,8 +11,6 @@ export default function SkillFeed(props) {
   const [originalLanguage, set_originalLanguage] = useState(original);
   const [nativeLanguage, set_nativeLanguage] = useState(native);
 
-  console.log("SHOW ME ID", props.id);
-
   return (
     <div>
       <FormControl variant="outlined" className="formControl">
