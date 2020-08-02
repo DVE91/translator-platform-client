@@ -42,8 +42,11 @@ export default function MyJob() {
     dispatch(fetchJobs(user.id));
   }, [dispatch, user.id]);
 
-  const sortedJobs = [...jobs].sort(function (a, b) {
+  const sortedDeadline = [...jobs].sort(function (a, b) {
     return new Date(a.endDate) - new Date(b.endDate);
+  });
+  const sortedDeadlineAndSubmitted = [...sortedDeadline].sort(function (a, b) {
+    return a.submitted - b.submitted;
   });
 
   return (
@@ -72,7 +75,7 @@ export default function MyJob() {
           ) : (
             <CardContent>
               <div className={classes.chartContainer}>
-                {sortedJobs.map((job) => (
+                {sortedDeadlineAndSubmitted.map((job) => (
                   <JobFeed
                     key={job.id}
                     id={job.id}

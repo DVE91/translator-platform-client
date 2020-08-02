@@ -19,11 +19,6 @@ export default function DashboardSliceReducer(state = initialState, action) {
         (availability) => availability.date
       );
       return { ...state, availability: datesFromAvailability };
-    case "AVAILABILITY_UPDATED":
-      return {
-        ...state,
-        availability: [...state.availability, action.payload.date],
-      };
     case "AVAILABILITY_CLEARED":
       return { ...state, availability: [] };
     case "SKILLS_FETCHED":

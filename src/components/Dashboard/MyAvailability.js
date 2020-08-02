@@ -57,7 +57,7 @@ export default function MyAvailability() {
       moment(date).format("YYYY-MM-DD")
     );
     await dispatch(clearAvailability(user.id));
-    convertedDates.map((date) => dispatch(updateAvailability(date, user.id)));
+    dispatch(updateAvailability(convertedDates, user.id));
   };
 
   useEffect(() => {

@@ -11,47 +11,40 @@ import { datesAdded } from "../../../store/order/actions";
 import { selectOrder } from "../../../store/order/selectors";
 
 export default function Deadline() {
-  const [date, set_Date] = useState(moment());
-  const [minimumDate, set_minimumDate] = useState(
-    moment().add(2, "days").format()
-  );
-  const [tooManywords, set_tooManyWords] = useState(false);
   const dispatch = useDispatch();
+  const [date, set_Date] = useState(moment());
+
   const order = useSelector(selectOrder);
   const wordCount = order.wordCount;
+  const defaultDeadline = moment().add(48, "hours").format();
 
   //option to disable weekends in deadline selector field
   // function disableWeekends(date) {
   //   return date.getDay() === 0 || date.getDay() === 6 || new Date() === date;
   // }
 
-  useEffect(() => {
-    dispatch(datesAdded({ start: moment(), end: date }));
-  }, [dispatch, date]);
-
   const dateChangeHandler = (dates) => {
     set_Date(dates);
+    dispatch(datesAdded({ start: moment(), end: dates }));
   };
 
   console.log("what date", date);
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <>
         <h5>1. Choose the deadline</h5>
-        {tooManywords ? (
-          <div>
-            <br />
-            <h6>
-              Those are a lot of words to translate! Please do select a deadline
-              but keep in mind that the translator might get in touch with you
-              to discuss feasible deadline options.{" "}
-            </h6>
-            <br />
-          </div>
-        ) : null}
         <KeyboardDatePicker
           disablePast={true}
-          minDate={minimumDate}
+          minDate={
+            wordCount > 4000 && wordCount <= 6000
+              ? moment().add(72, "hours").format()
+              : wordCount > 6000 && wordCount <= 8000
+              ? moment().add(96, "hours").format()
+              : wordCount > 8000
+              ? moment().add(120, "hours").format()
+              : defaultDeadline
+          }
           // shouldDisableDate={disableWeekends}
           margin="normal"
           id="date-picker-dialog"

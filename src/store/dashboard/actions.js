@@ -43,18 +43,11 @@ export const availabilityFetched = (availability) => {
   };
 };
 
-export const availabilityUpdated = (availability) => {
+export const availabilityCleared = () => {
   return {
-    type: "AVAILABILITY_UPDATED",
-    payload: availability,
+    type: "AVAILABILITY_CLEARED",
   };
 };
-
-export const availabilityCleared= () => {
-  return {
-    type: "AVAILABILITY_CLEARED"
-  }
-}
 
 export const fetchProfile = (userId) => {
   return async function (dispatch, getState) {
@@ -127,8 +120,6 @@ export const updateAvailability = (dates, userId) => {
   return async (dispatch, getState) => {
     const token = getState().user.token;
     const id = userId;
-    console.log("whats dates in thunk?", dates);
-
     try {
       const response = await axios.post(
         `${apiUrl}/user/${id}/availability/`,
@@ -141,8 +132,8 @@ export const updateAvailability = (dates, userId) => {
           },
         }
       );
-      const availability = response.data.availability;
-      dispatch(availabilityUpdated(availability));
+      const idResponse = response.data.id;
+      dispatch(fetchAvailability(idResponse));
     } catch (error) {
       if (error.response) {
         console.log("error", error.response.data.message);
