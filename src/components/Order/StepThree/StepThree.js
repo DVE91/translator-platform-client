@@ -22,21 +22,11 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     margin: "40px",
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     marginBottom: 12,
-  },
-  avatar: {
-    backgroundColor: "lightgreen",
-    display: "center",
+    padding: "30px",
   },
 });
 
@@ -82,7 +72,7 @@ export default function StepThree() {
           {price > 0 ? (
             <Typography variant="body1" component="p">
               <br />
-              total price: € {price}
+              <h6>total price: € {price}</h6>
               <br />
               <FormGroup row>
                 <FormControlLabel
@@ -93,7 +83,7 @@ export default function StepThree() {
                       name="checkPayment"
                     />
                   }
-                  label="Payment is due within 48 hours after order confirmation. I accept that this is binding."
+                  label="Send me a 'Tikkie' and I'll pay it straight away. Promise!"
                 />
               </FormGroup>
             </Typography>

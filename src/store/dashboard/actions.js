@@ -100,7 +100,7 @@ export const clearAvailability = (userId) => {
     const token = getState().user.token;
     const id = userId;
     try {
-      const response = await axios.delete(`${apiUrl}/user/${id}/availability`, {
+      await axios.delete(`${apiUrl}/user/${id}/availability`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -289,14 +289,11 @@ export const deleteSkill = (skillId) => {
     const token = getState().user.token;
     const id = getState().user.id;
     try {
-      const response = await axios.delete(
-        `${apiUrl}/user/${id}/skills/${skillId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.delete(`${apiUrl}/user/${id}/skills/${skillId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       dispatch(skillDeleted(skillId));
     } catch (error) {
       if (error.response) {

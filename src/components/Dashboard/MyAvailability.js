@@ -64,8 +64,6 @@ export default function MyAvailability() {
     dispatch(fetchAvailability(user.id));
   }, [user.id]);
 
-  console.log("ok now right?");
-
   return (
     <Card className={classes.root} raised={true}>
       <CardHeader

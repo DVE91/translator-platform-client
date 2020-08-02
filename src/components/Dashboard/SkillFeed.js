@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteSkill } from "../../store/dashboard/actions";
-import { Button, Select, FormControl, InputLabel } from "@material-ui/core";
+import { Button, Select, FormControl } from "@material-ui/core";
 
 export default function SkillFeed(props) {
   const dispatch = useDispatch();

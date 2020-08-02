@@ -41,6 +41,7 @@ export default function TranslationOptions() {
 
   return (
     <div>
+      <br />
       <h5> Translation options</h5>
       <FormControl variant="outlined" className="formControl">
         <InputLabel htmlFor="outlined-type-native-simple">Type</InputLabel>

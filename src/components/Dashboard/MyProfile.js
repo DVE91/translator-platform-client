@@ -59,8 +59,6 @@ export default function MyProfile() {
     set_addSkill(false);
   };
 
-  console.log("rendertest");
-
   return (
     <Card className={classes.root} raised={true}>
       <CardHeader

@@ -4,7 +4,7 @@ import { extendMoment } from "moment-range";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "react-material-ui-carousel";
-import { Button, Container } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import TranslatorCard from "./TranslatorCard";
 import { fetchProfiles } from "../../../store/translation/actions";
 import { selectProfiles } from "../../../store/translation/selectors";
@@ -21,9 +21,7 @@ export default function TranslatorProfiles() {
 
   useEffect(() => {
     dispatch(fetchProfiles(originalLanguage, nativeLanguage));
-  }, [dispatch, order.endDate, profiles.length]);
-
-  console.log("transprofiles render", profiles);
+  }, [dispatch, order.endDate]);
 
   const filteredProfiles = profiles.filter((profile) => {
     const datesExtractedFromAvailability = profile.availabilities.map(
@@ -40,14 +38,14 @@ export default function TranslatorProfiles() {
         ? 4
         : 5;
 
-    const availableDaysRange = moment.range(
+    const availableDaysTillDeadlineRange = moment.range(
       moment(new Date(), "YYYY-MM-DD"),
       moment(order.endDate, "YYYY-MM-DD")
     );
 
     let matchCounter = 0;
     datesExtractedFromAvailability.map((date) =>
-      date.within(availableDaysRange) ? matchCounter++ : null
+      date.within(availableDaysTillDeadlineRange) ? matchCounter++ : null
     );
 
     if (matchCounter >= workingDaysNeeded) {
@@ -63,19 +61,8 @@ export default function TranslatorProfiles() {
         {filteredProfiles.length === 0 ? (
           <div>
             <Loading />
-            {/* <Button
-              onClick={() =>
-                dispatch(fetchProfiles(originalLanguage, nativeLanguage))
-              }
-              variant="outlined"
-              color="primary"
-              size="large"
-            >
-              Search again
-            </Button>{" "} */}
-            <br />
             <p>
-              Looks like they're no translators available... please change the
+              Looks like there are no translators available... please change the
               deadline.
             </p>
           </div>

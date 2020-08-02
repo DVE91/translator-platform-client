@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import MomentUtils from "@date-io/moment";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,

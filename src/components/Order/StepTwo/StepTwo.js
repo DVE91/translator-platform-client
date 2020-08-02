@@ -6,6 +6,7 @@ export default function StepTwo() {
   return (
     <div className="step">
       <Deadline />
+      <br /> <br />
       <TranslatorProfiles />
     </div>
   );

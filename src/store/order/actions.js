@@ -3,7 +3,6 @@ import axios from "axios";
 import { showError, showMessage } from "../appState/actions";
 
 export function documentUploaded(file) {
-  console.log("WHATS PAYLOAD DOC?", file);
   return {
     type: "TRANSLATION_DOCUMENT_UPLOADED",
     payload: file,
@@ -46,7 +45,6 @@ export function nativeLanguageAdded(newLanguage) {
 }
 
 export function profileAdded(id) {
-  console.log("WHATS PROFILE PAYLOAD?", id);
   return {
     type: "PROFILE_ADDED",
     payload: id,

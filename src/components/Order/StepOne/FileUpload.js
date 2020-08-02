@@ -56,7 +56,8 @@ export default function FileUpload() {
             />
             <FormHelperText>Required</FormHelperText>
           </FormControl>
-
+          <br />
+          <br />
           <DropzoneArea
             filesLimit={1}
             showFileNames={true}
