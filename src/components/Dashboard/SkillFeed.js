@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteSkill } from "../../store/dashboard/actions";
-import { Button, Select, FormControl, InputLabel } from "@material-ui/core";
+import { Button, Select, FormControl } from "@material-ui/core";
 
 export default function SkillFeed(props) {
   const dispatch = useDispatch();
@@ -10,8 +10,6 @@ export default function SkillFeed(props) {
   const native = props.skills.nativeLanguage.title;
   const [originalLanguage, set_originalLanguage] = useState(original);
   const [nativeLanguage, set_nativeLanguage] = useState(native);
-
-  console.log("SHOW ME ID", props.id);
 
   return (
     <div>

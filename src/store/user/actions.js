@@ -31,6 +31,7 @@ const tokenStillValid = (userWithoutToken) => ({
 
 export const logOut = () => ({ type: "LOG_OUT" });
 
+//login (both for customers and translators)
 export const login = (emailAddress, password) => {
   return async (dispatch, getState) => {
     try {

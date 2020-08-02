@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
-import DateFnsUtils from "@date-io/date-fns";
-import { useState, useEffect } from "react";
+import MomentUtils from "@date-io/moment";
+import { useState } from "react";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -11,62 +11,44 @@ import { datesAdded } from "../../../store/order/actions";
 import { selectOrder } from "../../../store/order/selectors";
 
 export default function Deadline() {
-  const [date, set_Date] = useState(new Date());
-  const [tooManywords, set_tooManyWords] = useState(false);
   const dispatch = useDispatch();
+  const [date, set_Date] = useState(moment());
+
   const order = useSelector(selectOrder);
+  const wordCount = order.wordCount;
+  const defaultDeadline = moment().add(48, "hours").format();
 
-  //option to disable weekends in deadline selector
-  const disableWeekends = (date) => {
-    return date.getDay() === 0 || date.getDay() === 6 || new Date() === date;
-  };
+  //option to disable weekends in deadline selector field
+  // function disableWeekends(date) {
+  //   return date.getDay() === 0 || date.getDay() === 6 || new Date() === date;
+  // }
 
-  useEffect(() => {
-    dispatch(datesAdded({ start: new Date(), end: date }));
-  }, [dispatch, date]);
-
-  //component keeps rerendering because of the datechange when larger deadline is set. Needs fixing for bigger  files.
   const dateChangeHandler = (dates) => {
     set_Date(dates);
+    dispatch(datesAdded({ start: moment(), end: dates }));
   };
 
-  const deadlineRegulator = () => {
-    if (order.wordCount <= 4000) {
-      return moment(new Date()).add(2, "days");
-    } else if (order.wordCount > 4000 && order.wordcount <= 6000) {
-      return moment(date).add(3, "days");
-    } else if (order.wordCount > 6000 && order.wordcount <= 8000) {
-      return moment(new Date()).add(4, "days");
-    } else if (order.wordCount > 8000 && order.wordcount <= 10000) {
-      return moment(new Date()).add(5, "days");
-    } else {
-      set_tooManyWords(true);
-      return moment(new Date()).add(6, "days");
-    }
-  };
+  console.log("what date", date);
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={MomentUtils}>
       <>
         <h5>1. Choose the deadline</h5>
-        {tooManywords ? (
-          <div>
-            <br />
-            <h6>
-              Those are a lot of words to translate! Please do select a deadline
-              but keep in mind that the translator might get in touch with you
-              to discuss feasible deadline options.{" "}
-            </h6>
-            <br />
-          </div>
-        ) : null}
         <KeyboardDatePicker
           disablePast={true}
-          // minDate={deadlineRegulator}
-          shouldDisableDate={disableWeekends}
+          minDate={
+            wordCount > 4000 && wordCount <= 6000
+              ? moment().add(72, "hours").format()
+              : wordCount > 6000 && wordCount <= 8000
+              ? moment().add(96, "hours").format()
+              : wordCount > 8000
+              ? moment().add(120, "hours").format()
+              : defaultDeadline
+          }
+          // shouldDisableDate={disableWeekends}
           margin="normal"
           id="date-picker-dialog"
-          format="MM/dd/yyyy"
+          format="DD/MM/YYYY"
           value={date}
           onChange={dateChangeHandler}
           KeyboardButtonProps={{

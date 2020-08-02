@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/user/selectors";
@@ -42,7 +41,7 @@ export default function Navigation() {
             component="a"
             label="Tone of Choice"
             href="/"
-            onClick={(event) => event.preventDefault}
+            onClick={() => handleChange}
             style={{ color: "white" }}
           />
 

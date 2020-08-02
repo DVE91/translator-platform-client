@@ -1,20 +1,25 @@
 import React from "react";
 import moment from "moment";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAvailability,
+  updateAvailability,
+  clearAvailability,
+} from "../../store/dashboard/actions";
+import { selectAvailability } from "../../store/dashboard/selectors";
+import { selectUser } from "../../store/user/selectors";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Divider,
   Button,
   Typography,
   Avatar,
 } from "@material-ui/core";
 import MultipleDatesPicker from "@randex/material-ui-multiple-dates-picker";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 import EventAvailableRoundedIcon from "@material-ui/icons/EventAvailableRounded";
 import Loading from "../Loading";
 
@@ -37,15 +42,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MyAvailability() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const availability = useSelector(selectAvailability);
+  const user = useSelector(selectUser);
+  const formattedDates = [...availability].map((date) => new Date(date));
+
   const [open, setOpen] = useState(false);
-  const [selectedDates, set_selectedDates] = useState([]);
+  const [selectedDates, set_selectedDates] = useState(formattedDates);
+
   const onCancel = () => setOpen(false);
-  const onSubmit = (dates) => {
-    set_selectedDates(dates);
+  const onSubmit = async (dates) => {
     setOpen(false);
+    const convertedDates = dates.map((date) =>
+      moment(date).format("YYYY-MM-DD")
+    );
+    await dispatch(clearAvailability(user.id));
+    dispatch(updateAvailability(convertedDates, user.id));
   };
 
-  console.log("What's selected dates?", selectedDates);
+  useEffect(() => {
+    dispatch(fetchAvailability(user.id));
+  }, [user.id]);
 
   return (
     <Card className={classes.root} raised={true}>
@@ -62,25 +79,32 @@ export default function MyAvailability() {
         }
       />
       <Divider />
-      <CardContent>
-        <div className={classes.chartContainer}>
-          <div>
-            <Button
-              variant="outlined"
-              color="secondary"
-              onClick={() => setOpen(!open)}
-            >
-              update availability
-            </Button>
-            <MultipleDatesPicker
-              open={open}
-              selectedDates={selectedDates}
-              onCancel={onCancel}
-              onSubmit={onSubmit}
-            />
+      {!formattedDates || !user.id ? (
+        <Loading />
+      ) : (
+        <CardContent>
+          <div className={classes.chartContainer}>
+            <div>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={() => {
+                  setOpen(!open);
+                  set_selectedDates(formattedDates);
+                }}
+              >
+                update availability
+              </Button>
+              <MultipleDatesPicker
+                open={open}
+                selectedDates={selectedDates}
+                onCancel={onCancel}
+                onSubmit={onSubmit}
+              />
+            </div>
           </div>
-        </div>
-      </CardContent>
+        </CardContent>
+      )}
     </Card>
   );
 }
