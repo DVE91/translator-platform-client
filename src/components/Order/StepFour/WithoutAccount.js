@@ -37,7 +37,7 @@ export default function WithoutAccount() {
       }
     }, autosaveInterval);
     return () => clearTimeout(timer);
-  }, [name]);
+  }, [dispatch, name, savedName]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,7 +47,7 @@ export default function WithoutAccount() {
       }
     }, autosaveInterval);
     return () => clearTimeout(timer);
-  }, [email]);
+  }, [dispatch, email, savedEmail]);
 
   return (
     <Container component="main" maxWidth="xs">

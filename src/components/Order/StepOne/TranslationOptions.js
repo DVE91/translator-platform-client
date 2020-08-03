@@ -46,6 +46,7 @@ export default function TranslationOptions() {
       <FormControl variant="outlined" className="formControl">
         <InputLabel htmlFor="outlined-type-native-simple">Type</InputLabel>
         <Select
+          style={{ marginTop: "10px" }}
           native
           value={docType}
           onChange={(e) => typeChangeHandler(e.target.value)}
@@ -74,6 +75,7 @@ export default function TranslationOptions() {
           From (language)
         </InputLabel>
         <Select
+          style={{ marginTop: "10px" }}
           native
           value={originalLanguage}
           onChange={(e) => oldLanguageChangeHandler(e.target.value)}
@@ -97,6 +99,7 @@ export default function TranslationOptions() {
           To (language)
         </InputLabel>
         <Select
+          style={{ marginTop: "10px" }}
           native
           value={translatedLanguage}
           onChange={(e) => newLanguageChangeHandler(e.target.value)}

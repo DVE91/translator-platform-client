@@ -53,12 +53,9 @@ export default function TranslationPage() {
       history.push("/");
     } else {
       dispatch(fetchJobs(user.id));
-      dispatch(fetchFinances(user.Id));
+      dispatch(fetchFinances(user.id));
     }
-  }, [token, history, dispatch, user.isTranslator, user.id, allJobs[id]]);
-
-  console.log("What's single job?", singleJob);
-  console.log("what's finance id?", finance.id);
+  }, [token, history, dispatch, user.isTranslator, user.id]);
 
   return (
     <div>

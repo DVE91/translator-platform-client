@@ -28,8 +28,6 @@ export default function Deadline() {
     dispatch(datesAdded({ start: moment(), end: dates }));
   };
 
-  console.log("what date", date);
-
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <>

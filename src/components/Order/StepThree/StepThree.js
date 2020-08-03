@@ -43,9 +43,7 @@ export default function StepThree() {
   const quoteInterval = 1000;
   useEffect(() => {
     setTimeout(() => dispatch(fetchPricing(order.profileId)), quoteInterval);
-  }, [dispatch, price]);
-
-  console.log("price?", price);
+  }, [dispatch, order.profileId]);
 
   if (paid) {
     dispatch(totalPrice(price));

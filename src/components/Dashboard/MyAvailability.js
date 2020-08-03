@@ -62,7 +62,7 @@ export default function MyAvailability() {
 
   useEffect(() => {
     dispatch(fetchAvailability(user.id));
-  }, [user.id]);
+  }, [dispatch, user.id]);
 
   return (
     <Card className={classes.root} raised={true}>

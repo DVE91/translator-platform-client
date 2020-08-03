@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/user/selectors";
@@ -24,7 +25,6 @@ export default function Navigation() {
   const user = useSelector(selectUser);
 
   const handleChange = (event, newValue) => {
-    console.log("Whats value?", value);
     set_value(newValue);
   };
 
@@ -32,16 +32,16 @@ export default function Navigation() {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs
-          value={0}
+          value={value}
+          onChange={handleChange}
           variant="fullWidth"
           indicatorColor="secondary"
           aria-label="nav tabs"
         >
           <Tab
-            component="a"
+            component={Link}
             label="Tone of Choice"
-            href="/"
-            onClick={() => handleChange}
+            to="/"
             style={{ color: "white" }}
           />
 

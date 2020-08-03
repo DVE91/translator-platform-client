@@ -30,7 +30,7 @@ export default function SignUp(props) {
     if (token !== null && props.redirect) {
       history.push("/");
     }
-  }, [token, history]);
+  }, [token, history, props.redirect]);
 
   function submitSignUpForm(event) {
     event.preventDefault();

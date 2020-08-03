@@ -21,7 +21,7 @@ export default function TranslatorProfiles() {
 
   useEffect(() => {
     dispatch(fetchProfiles(originalLanguage, nativeLanguage));
-  }, [dispatch, order.endDate]);
+  }, [dispatch, order.endDate, originalLanguage, nativeLanguage]);
 
   const filteredProfiles = profiles.filter((profile) => {
     const datesExtractedFromAvailability = profile.availabilities.map(

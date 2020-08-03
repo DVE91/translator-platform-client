@@ -36,20 +36,21 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/order" component={OrderPage} />
-          <Route exact path="/login" component={LoginPage} />
           <Route
             exact
             path="/login/translator"
             component={TranslatorLoginPage}
           />
-          <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/login" component={LoginPage} />
           <Route
             exact
             path="/signup/translator"
             component={TranslatorSignUpPage}
           />
-          <Route exact path="/dashboard" component={DashboardPage} />
+          <Route exact path="/signup" component={SignUpPage} />
+
           <Route path="/dashboard/jobs/:id" component={TranslationPage} />
+          <Route path="/dashboard" component={DashboardPage} />
         </Switch>
       </div>
     </ThemeProvider>

@@ -34,7 +34,9 @@ export default function TranslatedDocument(props) {
       }
     }, autosaveInterval);
     return () => clearTimeout(timer);
-  }, [translation]);
+  }, [translation, dispatch, props.jobId, savedTranslation, user.id]);
+
+  console.log("render transla?");
 
   function submitHandler(event) {
     event.preventDefault();
@@ -67,9 +69,6 @@ export default function TranslatedDocument(props) {
         }
       );
   }
-
-  console.log("useer fullname?", user.fullName);
-
   return (
     <div>
       <CardHeader

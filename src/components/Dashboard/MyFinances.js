@@ -64,7 +64,7 @@ export default function MyFinances() {
         }
       />
       <Divider />
-      {finances.id !== undefined ? (
+      {user.id !== undefined ? (
         <CardContent>
           <div className={classes.chartContainer}>
             <div>

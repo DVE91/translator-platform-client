@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { addSkill } from "../../store/dashboard/actions";
-import { Button, Select, FormControl, InputLabel } from "@material-ui/core";
+import { Button, Select, FormControl } from "@material-ui/core";
 
 export default function Skill(props) {
   const dispatch = useDispatch();
