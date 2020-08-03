@@ -70,6 +70,9 @@ export default function MyJob() {
           {jobs.length === 0 ? (
             <div>
               <Loading />
+              {setTimeout(() => {
+                dispatch(fetchJobs(user.id));
+              }, 1000)}
               no jobs yet
             </div>
           ) : (

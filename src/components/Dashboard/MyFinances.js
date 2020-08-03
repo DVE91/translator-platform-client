@@ -111,7 +111,12 @@ export default function MyFinances() {
           </div>
         </CardContent>
       ) : (
-        <Loading />
+        <div>
+          <Loading />
+          {setTimeout(() => {
+            dispatch(fetchFinances(user.id));
+          }, 1000)}
+        </div>
       )}
     </Card>
   );

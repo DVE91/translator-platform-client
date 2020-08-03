@@ -70,7 +70,7 @@ export default function StepThree() {
           {price > 0 ? (
             <Typography variant="body1" component="p">
               <br />
-              <h6>total price: € {price}</h6>
+              <h6>total price: € {price.toFixed(2)}</h6>
               <br />
               <FormGroup row>
                 <FormControlLabel

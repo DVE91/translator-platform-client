@@ -97,7 +97,12 @@ export default function MyProfile() {
                   />
                 ))
               ) : (
-                <Loading />
+                <div>
+                  <Loading />
+                  {setTimeout(() => {
+                    dispatch(fetchProfile(user.id));
+                  }, 1000)}
+                </div>
               )}
             </span>
           </div>

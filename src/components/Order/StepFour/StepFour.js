@@ -17,7 +17,7 @@ export default function StepFour() {
           <h6>Your order details:</h6>
 
           <p>
-            We're going to deliver one translation for your document
+            We're going to deliver one translation for your document{" "}
             <strong>'{order.title}'</strong>
           </p>
           <p>
