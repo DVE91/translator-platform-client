@@ -53,7 +53,7 @@ export default function MyProfile() {
 
   useEffect(() => {
     dispatch(fetchLanguages());
-  }, [dispatch, user.id]);
+  }, [dispatch]);
 
   const cancelAddSkill = () => {
     set_addSkill(false);
@@ -70,9 +70,6 @@ export default function MyProfile() {
         avatar={<Avatar alt="profile icon" src={user.imageUrl} />}
       />
       <Divider />
-      {/* {profile.id !== undefined &&
-      skills.length !== 0 &&
-      languages.length !== 0 ? ( */}
       <CardContent>
         <div className={classes.chartContainer}>
           <div className="profileItem">
@@ -117,9 +114,6 @@ export default function MyProfile() {
           </div>
         </div>
       </CardContent>
-      {/* ) : (
-        <Loading />
-      )} */}
     </Card>
   );
 }

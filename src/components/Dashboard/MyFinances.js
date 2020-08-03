@@ -40,9 +40,13 @@ export default function MyFinances() {
   const user = useSelector(selectUser);
   const [rate, set_rate] = useState("");
 
-  useEffect(() => {
-    dispatch(fetchFinances(user.id));
-  }, [dispatch, user.id]);
+  useEffect(
+    () => {
+      dispatch(fetchFinances(user.id));
+    },
+    [dispatch, user.id],
+    finances.id
+  );
 
   const updateFee = () => {
     dispatch(updateFinances(rate, user.id, finances.id));

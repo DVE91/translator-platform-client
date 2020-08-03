@@ -62,8 +62,8 @@ export default function TranslatorProfiles() {
           <div>
             <Loading />
             <p>
-              Looks like there are no translators available... please change the
-              deadline.
+              Looks like there are no translators available that match the
+              criteria... please try changing the deadline.
             </p>
           </div>
         ) : (
