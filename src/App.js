@@ -13,6 +13,9 @@ import SignUpPage from "./pages/Authentication/SignUpPage";
 import DashboardPage from "./pages/DashboardPage";
 import TranslationPage from "./pages/TranslationPage";
 import TranslatorSignUpPage from "./pages/Authentication/TranslatorSignUpPage";
+import { createMuiTheme, ThemeProvider, CssBaseline } from "@material-ui/core";
+
+const theme = createMuiTheme();
 
 function App() {
   const dispatch = useDispatch();
@@ -22,27 +25,34 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <meta
-        name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width"
-      />
-      <Navigation />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/order" component={OrderPage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/login/translator" component={TranslatorLoginPage} />
-        <Route exact path="/signup" component={SignUpPage} />
-        <Route
-          exact
-          path="/signup/translator"
-          component={TranslatorSignUpPage}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="App">
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <Route exact path="/dashboard" component={DashboardPage} />
-        <Route path="/dashboard/jobs/:id" component={TranslationPage} />
-      </Switch>
-    </div>
+        <Navigation />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/order" component={OrderPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route
+            exact
+            path="/login/translator"
+            component={TranslatorLoginPage}
+          />
+          <Route exact path="/signup" component={SignUpPage} />
+          <Route
+            exact
+            path="/signup/translator"
+            component={TranslatorSignUpPage}
+          />
+          <Route exact path="/dashboard" component={DashboardPage} />
+          <Route path="/dashboard/jobs/:id" component={TranslationPage} />
+        </Switch>
+      </div>
+    </ThemeProvider>
   );
 }
 
