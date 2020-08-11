@@ -57,6 +57,8 @@ The goal was to make a platform that is "best of both worlds". Make it easy for 
 put the translator back in the spotlights where they belong. 
 
 ##### Userstories :pencil2:
+Below you can find a quick overview of the main userstories of this project. For a complete overview including subtasks, [click here.](https://github.com/DVE91/translator-platform-client/projects/1) 
+
 1. As a customer in need of translation, I want to see which translators are available for my assignment, that match the criteria of the job.
 2. As a customer in need of translation, I want to receive a realtime quote, so I can book said job straight away.
 3. As a customer, I want to receive my order on or before the assigned deadline by e-mail.
