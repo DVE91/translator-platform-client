@@ -2,7 +2,7 @@
 
 ### About the app 
 
-If you want to try it out, check out [this section](#how-to-use-and-intall-this-app) that takes you through the process.
+If you want to try it out, check out [this section](#how-to-use-and-install-this-app) that takes you through the process.
 
 :eyes: [You can find the deployed version of this project here](https://epic-bhaskara-ab623f.netlify.app/) :eyes:
 
