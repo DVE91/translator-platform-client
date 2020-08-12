@@ -25,10 +25,24 @@ It provides a quick and easy order system for translations, and a nice dashboard
 :ballot_box_with_check: [Server repo](#server-repo)
 
 #### How to use and install this app 
-TO DO 
+Use the deployed version to play around, or clone repo (don't forget to install dependancies). 
+
+##### As a translator
+- Click "translator sign-up / login" to create a translator account. Your password will be hashed, safety first. 
+- Or, use a test account (for example: dee@test.com, pw "dee") to login.
+- In your dashboard you can: update your availability, alter your rate, add or delete language skills, work on incoming jobs and submit the work (this will send an email with the finished work to the client).
+
+##### As a customer in need of a translation
+- Click "sign-up / login" if you want to make a customer account /login to an existing one.
+- You can also book a translation without an account. In any case, click "Let's go!" on the homepage for a new order.
+- Translators are selected by language skills and accurate availability, based on the workload of the uploaded document. This website works with a realtime calendar. If no translators are shown in the designated area, it probably means there's no current availability. If you want to test the order process, I'd advise to log in as a translator and make sure there is availability for your desired language options.
 
 #### Demo
-TO DO
+##### As a translator
+![Translator demo](Translatordemo.gif)
+
+##### As a customer in need of a translation
+![Customer demo](Customerdemo.gif)
 
 #### Technologies
 Click to see project examples!
