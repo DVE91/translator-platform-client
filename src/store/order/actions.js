@@ -62,7 +62,6 @@ export const createOrder = () => {
         ...user,
         ...payment,
       });
-      console.log("WHATS ORDER RESPONSE?", response.data);
       dispatch(showMessage());
     } catch (error) {
       console.log(error.response.data.message);

@@ -68,7 +68,7 @@ export default function MyFinances() {
         <CardContent>
           <div className={classes.chartContainer}>
             <div>
-              <h6> MY BALANCE: €{finances.currentBalance.toFixed(2)}</h6>
+              <h6> MY BALANCE: €{finances.currentBalance}</h6>
               <Button
                 onClick={() => console.log("Pay day!")}
                 variant="contained"

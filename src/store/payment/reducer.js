@@ -9,7 +9,7 @@ export default function PaymentSliceReducer(state = initialState, action) {
     case "PRICING_FETCHED":
       return { ...state, pricing: action.payload };
     case "TOTAL_PRICE":
-      return { ...state, totalPrice: action.payload };
+      return { ...state, totalPrice: action.payload.toFixed(2) };
     case "INVOICE_PAID":
       return { ...state, paid: action.payload };
     default:

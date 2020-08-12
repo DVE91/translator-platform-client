@@ -26,7 +26,6 @@ export const fetchPricing = (profileId) => {
     const response = await axios.get(
       `${apiUrl}/pricing?profileId=${profileId}`
     );
-    console.log("response?", response.data.pricing);
     dispatch(pricingFetched(response.data.pricing.centsPerWord));
   };
 };
